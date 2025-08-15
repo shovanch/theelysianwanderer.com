@@ -1,0 +1,108 @@
+@import 'tailwindcss';
+
+/* Load plugins from CSS instead of require() */
+@plugin "@tailwindcss/typography";
+
+/* Dark variant - replaces darkMode: "selector" from v3 config */
+@variant dark (&:where(.dark, .dark *));
+
+/* Theme tokens - replaces theme object from v3 config */
+@theme {
+  /* Font families */
+  --font-sans:
+    var(--font-inter), ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-serif:
+    var(--font-crimson-pro), ui-serif, Georgia, Cambria, 'Times New Roman',
+    Times, serif;
+  --font-serif-title:
+    var(--font-newsreader), ui-serif, Georgia, Cambria, 'Times New Roman',
+    Times, serif;
+}
+
+/* Replace tailwind-scrollbar-hide with native utility */
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+html {
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+}
+body {
+  @apply bg-[#fef9f6] font-serif text-xl/relaxed text-black md:text-xl/relaxed dark:bg-[#111110] dark:text-[#eee];
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-newsreader);
+}
+
+/* Typography/Prose styles - replaces typographyStyles() function */
+
+/* Overrides for Katex */
+.katex {
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+  font:
+    normal 1.375rem KaTeX_Main,
+    Times New Roman,
+    serif !important;
+}
+
+/* Style the anchor links that rehype-autolink-headings adds */
+.anchor-link {
+  @apply ml-2 text-gray-400 opacity-0 transition-opacity hover:opacity-100;
+}
+
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link {
+  @apply opacity-100;
+}
+
+/* GLOBAL STYLES: override paragraph styles after <hr> inside .read-only-prose for notes */
+.read-only-prose hr {
+  @apply my-6 md:my-10;
+}
+
+/* First <p> after <hr> */
+.read-only-prose p,
+.read-only-prose hr + p {
+  @apply !mb-0;
+}
+
+/* Second <p> after <hr> */
+.read-only-prose p + p,
+.read-only-prose hr + p + p {
+  @apply !mt-4 text-[0.9em];
+}
+
+.header-anchor {
+  @apply ml-2 no-underline opacity-50 transition-opacity hover:opacity-100;
+}

@@ -1,0 +1,42 @@
+@reference "./index.css"
+
+#table-of-contents {
+  @apply !mt-10 mb-0 text-xl font-semibold md:text-2xl;
+}
+
+/* Style the TOC list */
+#table-of-contents + ul {
+  @apply list-none pl-0;
+}
+
+#table-of-contents + ul,
+#table-of-contents + ul ul {
+  @apply list-none pl-0;
+}
+
+#table-of-contents + ul ul,
+#table-of-contents + ul ul li,
+#table-of-contents + ul li {
+  @apply !my-2.5 !text-base;
+}
+
+#table-of-contents + ul li ul li {
+  @apply !pl-4;
+}
+
+/* Style TOC links */
+#table-of-contents + ul a {
+  @apply !text-lg text-blue-600 hover:text-blue-800 hover:underline dark:text-blue-400 dark:hover:text-blue-300;
+}
+
+/* Style the anchor links that rehype-autolink-headings adds */
+.anchor-link {
+  @apply ml-2 text-gray-400 opacity-0 transition-opacity hover:opacity-100;
+}
+
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link {
+  @apply opacity-100;
+}

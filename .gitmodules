@@ -1,0 +1,3 @@
+[submodule "src/content"]
+	path = src/content
+	url = https://github.com/shovanch/theelysianwanderer.com-vault.git
