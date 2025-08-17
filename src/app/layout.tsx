@@ -1,6 +1,6 @@
-import { Analytics } from '@vercel/analytics/next';
 import { type Metadata } from 'next';
 import { Crimson_Pro, Inter, Newsreader } from 'next/font/google';
+import Script from 'next/script';
 import { Providers } from '~/app/providers';
 import { Layout } from '~/components/layout';
 import '../styles/index.css';
@@ -61,7 +61,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <html
+      suppressHydrationWarning
+      className={`${crimsonPro.variable} ${inter.variable} ${newsreader.variable} h-full antialiased`}
+      lang="en"
+    >
       <head>
         <link
           crossOrigin="anonymous"
@@ -71,20 +75,37 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <html
-        suppressHydrationWarning
-        className={`${crimsonPro.variable} ${inter.variable} ${newsreader.variable} h-full antialiased`}
-        lang="en"
-      >
-        <body className="flex h-full bg-zinc-50 dark:bg-[#111110]">
-          <Providers>
-            <div className="flex w-full">
-              <Layout>{children}</Layout>
-            </div>
-          </Providers>
-          <Analytics />
-        </body>
-      </html>
-    </>
+
+      <body className="flex h-full bg-zinc-50 dark:bg-[#111110]">
+        <Providers>
+          <div className="flex w-full">
+            <Layout>{children}</Layout>
+          </div>
+        </Providers>
+        <Script
+          data-website-id="bd7f3375-928e-40a7-a1cf-dd5a11e26cf4"
+          src="/umami/script.js"
+          strategy="afterInteractive"
+        />
+        <Script id="umami-outbound-tags" strategy="afterInteractive">
+          {`
+    (() => {
+      const name = 'outbound-link-click';
+      const isExternal = (a) => {
+        try {
+          return a.host !== window.location.host;
+        } catch { return false; }
+      };
+      document.querySelectorAll('a').forEach(a => {
+        if (isExternal(a) && !a.getAttribute('data-umami-event')) {
+          a.setAttribute('data-umami-event', name);
+          a.setAttribute('data-umami-event-url', a.href);
+        }
+      });
+    })();
+  `}
+        </Script>
+      </body>
+    </html>
   );
 }
