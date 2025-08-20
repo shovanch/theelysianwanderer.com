@@ -5,6 +5,7 @@ import pluginReactHooks from 'eslint-plugin-react-hooks';
 import pluginUnicorn from 'eslint-plugin-unicorn';
 import configPrettier from 'eslint-config-prettier';
 import tseslint from 'typescript-eslint';
+import pluginOxlint from 'eslint-plugin-oxlint';
 
 export default tseslint.config(
   {
@@ -105,5 +106,6 @@ export default tseslint.config(
       ],
     },
   },
+  pluginOxlint.configs['flat/recommended'], // oxlint should be the last one
   configPrettier,
 );

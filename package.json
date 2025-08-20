@@ -11,8 +11,8 @@
     "build": "bash scripts/vercel-build.sh",
     "build:turbo": "pnpm run sync-content && next build --turbo && pnpm run generate-pagefind",
     "start": "next start",
-    "lint": "eslint src/ --quiet",
-    "lint:fix": "eslint src/ --fix",
+    "lint": "npx oxlint src/ --quiet && eslint src/ --quiet",
+    "lint:fix": "npx oxlint src/ --fix && eslint src/ --fix",
     "format": "prettier --write 'src/*/**/*.{ts,tsx,js,jsx}'",
     "typecheck": "tsc --noEmit --project tsconfig.json",
     "generate-pagefind": "pagefind --verbose --site .next --output-path .next/static/chunks/pagefind",
@@ -64,6 +64,7 @@
     "eslint-config-next": "^15.4.6",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-oxlint": "^1.12.0",
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
@@ -80,6 +81,7 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,js,jsx}": [
+      "npx oxlint --fix",
       "eslint --fix",
       "prettier --write"
     ]
