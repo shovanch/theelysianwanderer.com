@@ -82,7 +82,6 @@
   "lint-staged": {
     "src/**/*.{ts,tsx,js,jsx}": [
       "npx oxlint --fix",
-      "eslint --fix",
       "prettier --write"
     ]
   }

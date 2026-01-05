@@ -1,8 +1,10 @@
 import { Container } from '~/components/container';
+import { ExploreLinks } from '~/components/explore-links';
+import { HomeFragments } from '~/components/home-fragments';
+import { HomeListing } from '~/components/home-listing';
 import { MarkdownContent } from '~/components/markdown-content';
 import LoadPagefind from '~/components/pagefind/load-pagefind-wrapper';
 import { PhotosCarousel } from '~/components/photos-carousel';
-import { PostCard } from '~/components/post-card';
 import { Signature } from '~/components/signature';
 import {
   ChefIcon,
@@ -12,17 +14,9 @@ import {
   MailIcon,
 } from '~/components/social-icons';
 import { SocialLink } from '~/components/social-link';
-import { getPosts, sortPostsByDate } from '~/utils/posts';
 import { getTextContent } from '~/utils/texts';
 
 export default async function Home() {
-  // Fetch all content from each category
-  const allContentTypes = ['posts', 'travels', 'notes', 'reads'] as const;
-  const allWritings = allContentTypes
-    .flatMap((type) => getPosts(type, type === 'reads' ? 3 : undefined))
-    .sort(sortPostsByDate)
-    .slice(0, 15);
-
   // Get hero text content
   const heroContent = getTextContent('hero.md');
 
@@ -77,32 +71,15 @@ export default async function Home() {
       <div className="mt-4 sm:mt-12">
         <PhotosCarousel />
       </div>
+      <Container className="mt-8 md:mt-12">
+        <ExploreLinks />
+      </Container>
       <Container
         className="mt-8 mb-16 md:mt-16"
         innerClassName="grid grid-cols-1 md:grid-cols-1 gap-12 md:gap-18"
       >
-        {allWritings.length > 0 && (
-          <div className="col-span-1">
-            <h2 className="text-2xl font-medium tracking-tight text-zinc-800 sm:text-4xl dark:text-zinc-100">
-              Writings
-            </h2>
-            <div className="mt-2 divide-y divide-zinc-200/70 border-t border-b border-zinc-200/70 dark:divide-zinc-700/50 dark:border-zinc-700/50">
-              {allWritings.map((post, index) => (
-                <div
-                  key={`${post.subdirectory}-${post.slug}`}
-                  className={`py-5 md:py-6 ${index === allWritings.length - 1 ? 'border-b-0' : ''}`}
-                >
-                  <PostCard
-                    key={`${post.subdirectory}-${post.slug}`}
-                    post={post}
-                    showPill={true}
-                    showTags={false}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        <HomeListing />
+        <HomeFragments />
       </Container>
     </>
   );

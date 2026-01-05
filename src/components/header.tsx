@@ -152,10 +152,10 @@ function MobileNavigation(
         <nav className="mt-6">
           <ul className="space-y-6 [&>li]:pb-6 [&>li:first-child]:pt-0 [&>li:last-child]:pb-0 [&>li:not(:last-child)]:border-b [&>li:not(:last-child)]:border-zinc-200/70 dark:[&>li:not(:last-child)]:border-zinc-700/50">
             <MobileNavItem href="/about">About</MobileNavItem>
-            <MobileNavItem href="/posts">Posts</MobileNavItem>
-            <MobileNavItem href="/travels">Travels</MobileNavItem>
+            <MobileNavItem href="/writings">Writings</MobileNavItem>
+            {/* <MobileNavItem href="/travels">Travels</MobileNavItem> */}
             <MobileNavItem href="/reads">Reads</MobileNavItem>
-            <MobileNavItem href="/notes">Notes</MobileNavItem>
+            <MobileNavItem href="/fragments">Fragments</MobileNavItem>
             <div className="flex flex-row gap-8">
               <MobileNavItem
                 isIcon
@@ -261,10 +261,10 @@ function DesktopNavigation(props: React.ComponentPropsWithoutRef<'nav'>) {
     <nav {...props}>
       <ul className="theme-transition flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
         <NavItem href="/about">About</NavItem>
-        <NavItem href="/posts">Posts</NavItem>
-        <NavItem href="/travels">Travels</NavItem>
+        <NavItem href="/writings">Writings</NavItem>
+        {/* <NavItem href="/travels">Travels</NavItem> */}
         <NavItem href="/reads">Reads</NavItem>
-        <NavItem href="/notes">Notes</NavItem>
+        <NavItem href="/fragments">Fragments</NavItem>
       </ul>
     </nav>
   );
@@ -563,6 +563,7 @@ export function Header() {
               </div>
               <div className="flex flex-1 justify-end md:justify-center">
                 <MobileNavigation className="pointer-events-auto md:hidden" />
+                {/* Hide desktop nav on homepage while preserving space */}
                 <DesktopNavigation
                   className={clsx(
                     'pointer-events-auto hidden md:block',

@@ -1,12 +1,6 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
-import {
-  PiCalendarBlankDuotone,
-  PiClockDuotone,
-  PiTagDuotone,
-} from 'react-icons/pi';
 import { Container } from '~/components/container';
 import { Prose } from '~/components/prose';
 import { formatDate } from '~/utils/format-date';
@@ -37,51 +31,23 @@ export function PostLayout({
         {/* Main Content - centered as normal */}
         <article className="mx-auto flex max-w-3xl flex-col items-center">
           <header className="flex w-full flex-col items-start md:items-center">
-            <div className="flex items-center gap-2.5 self-start md:self-center lg:gap-3">
-              {/* Reading Period or Published Date */}
+            {/* Metadata Row */}
+            <div className="flex flex-wrap items-center gap-2 self-start md:self-center lg:gap-4">
+              {/* Published Date */}
               <time
-                className="relative z-10 flex items-center gap-1 font-sans text-xs font-bold tracking-wider text-blue-600 uppercase lg:text-xs dark:text-zinc-400"
+                className="relative z-10 flex items-center gap-1 font-sans text-sm font-semibold text-zinc-600 capitalize lg:text-sm dark:text-zinc-400"
                 dateTime={formatDate(post.publishedAt)}
                 title="Published At"
               >
-                <PiCalendarBlankDuotone className="h-4 w-4" />
                 <span>{formatDate(post.publishedAt)}</span>
               </time>
 
-              <span className="flex min-w-20 items-center gap-1 font-sans text-xs font-bold tracking-wider text-zinc-600 uppercase lg:text-xs dark:text-zinc-400">
-                <PiClockDuotone className="h-4 w-4" />
+              <span className="h-1 w-1 rounded-full bg-zinc-600 dark:bg-zinc-500" />
+
+              {/* Reading Time */}
+              <span className="flex min-w-20 items-center gap-1 font-sans text-sm font-semibold text-zinc-600 capitalize lg:text-sm dark:text-zinc-400">
                 {post.readingTime}
               </span>
-
-              {post.tags && post.tags.length > 0 && (
-                <>
-                  <div className="flex flex-wrap items-center gap-1">
-                    <PiTagDuotone className="h-3 w-3 text-zinc-600 md:h-4 md:w-4 dark:text-zinc-400" />
-                    {post.tags.map((tag, index) => (
-                      <Link
-                        key={tag}
-                        passHref
-                        href={{
-                          pathname: '/posts',
-                          query: {
-                            tags: tag,
-                          },
-                        }}
-                      >
-                        <span
-                          key={tag}
-                          className="flex items-center font-sans text-xs font-bold tracking-wider text-zinc-600 uppercase lg:text-xs dark:text-zinc-400"
-                        >
-                          {tag}
-                          {index < post.tags.length - 1 && (
-                            <span className="mx-0 text-zinc-400">,</span>
-                          )}
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
-                </>
-              )}
             </div>
 
             <h1
