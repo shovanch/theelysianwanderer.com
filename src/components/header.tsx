@@ -563,7 +563,12 @@ export function Header() {
               </div>
               <div className="flex flex-1 justify-end md:justify-center">
                 <MobileNavigation className="pointer-events-auto md:hidden" />
-                <DesktopNavigation className="pointer-events-auto hidden md:block" />
+                <DesktopNavigation
+                  className={clsx(
+                    'pointer-events-auto hidden md:block',
+                    isHomePage && 'md:invisible',
+                  )}
+                />
               </div>
               <div className="flex justify-end gap-2 md:flex-1">
                 <CommandBar />
