@@ -29,7 +29,7 @@ export function HomeFragments({
         </h2>
         <ArrowRightIcon className="h-4 w-4 fill-zinc-500 transition-transform group-hover:translate-x-0.5 group-hover:fill-blue-600 dark:fill-zinc-400 dark:group-hover:fill-blue-400" />
       </Link>
-      <div className="mt-2 divide-y divide-zinc-200/70 border-b border-zinc-200/70 dark:divide-zinc-700/50 dark:border-zinc-700/50">
+      <div className="mt-2 divide-y divide-zinc-200/70 dark:divide-zinc-700/50">
         {allFragments.map((fragment) => (
           <FragmentCard key={fragment.id} fragment={fragment} />
         ))}

@@ -10,6 +10,7 @@ export type FragmentData = {
   publishedAt?: string;
   updatedAt?: string;
   isPublished: boolean;
+  fragmentCategory?: string;
 };
 
 function getFragmentsDirectory() {
@@ -78,6 +79,9 @@ export function getFragments(): FragmentData[] {
           : undefined,
         updatedAt: data.updatedAt ? String(data.updatedAt).trim() : undefined,
         isPublished,
+        fragmentCategory: data.fragmentCategory
+          ? String(data.fragmentCategory).trim()
+          : undefined,
       });
     } catch (error) {
       console.warn(`Error reading fragment from ${filePath}:`, error);

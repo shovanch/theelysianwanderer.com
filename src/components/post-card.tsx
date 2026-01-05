@@ -80,7 +80,7 @@ export function PostCard({
         )}
         <Card.Eyebrow
           as="time"
-          className="flex items-center gap-1"
+          className="flex items-center"
           dateTime={
             publishedAt &&
             !isNaN(new Date(`${publishedAt}T00:00:00Z`).getTime())
