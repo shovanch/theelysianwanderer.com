@@ -82,18 +82,17 @@ export function ReadsLayout({
             {/* Author */}
             {author && (
               <div className="mb-4 flex items-center gap-2 self-start md:self-center">
-                <PiUserDuotone className="h-5 w-5 text-blue-600 dark:text-zinc-400" />
-                <span className="text-lg font-medium text-zinc-700 md:text-xl dark:text-zinc-300">
-                  by {author}
+                <span className="text-lg font-medium text-zinc-700 md:text-2xl dark:text-zinc-300">
+                  by <span className="italic">{author}</span>
                 </span>
               </div>
             )}
 
             {/* Metadata Row */}
-            <div className="flex flex-wrap items-center gap-2 self-start md:self-center lg:gap-3">
+            <div className="flex flex-wrap items-center gap-2 self-start md:self-center lg:gap-4">
               {/* Reading Period or Published Date */}
               <time
-                className="relative z-10 flex items-center gap-1 font-sans text-xs font-bold tracking-wider text-blue-600 uppercase lg:text-xs dark:text-zinc-400"
+                className="relative z-10 flex items-center gap-1 font-sans text-sm font-semibold text-zinc-600 capitalize lg:text-sm dark:text-zinc-400"
                 dateTime={
                   readingPeriod
                     ? readingStartedAt || readingCompletedAt || post.publishedAt
@@ -101,7 +100,6 @@ export function ReadsLayout({
                 }
                 title="Published At"
               >
-                <PiCalendarBlankDuotone className="h-4 w-4" />
                 <span>
                   {readingPeriod
                     ? `Read ${readingPeriod}`
@@ -109,20 +107,20 @@ export function ReadsLayout({
                 </span>
               </time>
 
-              <span className="flex min-w-20 items-center gap-1 font-sans text-xs font-bold tracking-wider text-zinc-600 uppercase lg:text-xs dark:text-zinc-400">
-                <PiClockDuotone className="h-4 w-4" />
+              <span className="h-1 w-1 rounded-full bg-zinc-600 dark:bg-zinc-500" />
+              <span className="flex min-w-20 items-center gap-1 font-sans text-xs font-semibold text-zinc-600 capitalize lg:text-sm dark:text-zinc-400">
                 {post.readingTime}
               </span>
 
               {/* Tags */}
-              {post.tags && post.tags.length > 0 && (
+              {/* {post.tags && post.tags.length > 0 && (
                 <>
                   <div className="flex flex-wrap items-center gap-1">
                     <PiTagDuotone className="h-4 w-4 text-zinc-600 dark:text-zinc-400" />
                     {post.tags.map((tag, index) => (
                       <span
                         key={tag}
-                        className="flex items-center font-sans text-xs font-bold tracking-wider text-zinc-600 uppercase lg:text-xs dark:text-zinc-400"
+                        className="flex items-center font-sans text-xs font-semibold text-zinc-600 capitalize lg:text-sm dark:text-zinc-400"
                       >
                         {tag}
                         {index < post.tags.length - 1 && (
@@ -132,7 +130,7 @@ export function ReadsLayout({
                     ))}
                   </div>
                 </>
-              )}
+              )} */}
             </div>
           </header>
 

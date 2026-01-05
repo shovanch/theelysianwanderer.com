@@ -128,8 +128,8 @@ export function getPosts(
         continue;
       }
 
-      // Skip unpublished content in production
-      if (!isDevEnv && !(data.isPublished || data.published)) {
+      // Skip unpublished content in production - requires explicit isPublished: true
+      if (!isDevEnv && data.isPublished !== true) {
         continue;
       }
 

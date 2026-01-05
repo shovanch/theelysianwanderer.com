@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Container } from '~/components/container';
-import { ReadsCard } from '~/components/reads-card';
+import { ReadsView } from '~/components/reads-view';
 import { TagsSection } from '~/components/tags-section';
 import {
   filterPostsByTag,
@@ -12,11 +12,12 @@ import { getPosts } from '~/utils/posts';
 export default async function Reads({
   searchParams,
 }: {
-  searchParams: { tags?: string };
+  searchParams: { tags?: string; view?: string };
 }) {
-  const { tags } = await searchParams;
-  // Get the tags value early
+  const { tags, view } = await searchParams;
+  // Get the tags and view values early
   const currentTag = tags || '';
+  const currentView = view === 'list' ? 'list' : 'grid'; // default to grid
 
   // Fetch reads using the existing utility
   const allPosts = getPosts('reads');
@@ -54,22 +55,13 @@ export default async function Reads({
         </h2>
       )}
 
-      {/* Filtered Posts */}
-      <div className="mt-4 divide-y divide-zinc-200/70 border-t border-b border-zinc-200/70 dark:divide-zinc-700/50 dark:border-zinc-700/50">
-        {filteredPosts.length > 0 ? (
-          filteredPosts.map((post, index) => (
-            <div
-              key={post.slug}
-              className={`py-5 md:py-6 ${index === filteredPosts.length - 1 ? 'border-b-0' : ''}`}
-            >
-              <ReadsCard post={post} />
-            </div>
-          ))
-        ) : (
-          <p className="py-6 text-center text-zinc-500">
-            No reads found for this tag.
-          </p>
-        )}
+      {/* Posts with View Toggle */}
+      <div className="mt-4">
+        <ReadsView
+          posts={filteredPosts}
+          currentTag={currentTag}
+          currentView={currentView}
+        />
       </div>
 
       {/* Clear tag filter */}

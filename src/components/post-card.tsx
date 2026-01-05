@@ -71,7 +71,7 @@ export function PostCard({
         {showPill && (
           <>
             <span
-              className={`z-10 flex items-center gap-1 font-sans text-[0.75rem] font-bold tracking-wider uppercase lg:text-xs ${typeInfo.color}`}
+              className={`z-10 flex items-center gap-1 font-sans text-[0.75rem] font-bold capitalize lg:text-xs ${typeInfo.color}`}
             >
               <typeInfo.icon className="h-4 w-4" />
               {typeInfo.label}
@@ -88,17 +88,15 @@ export function PostCard({
               : undefined
           }
         >
-          <PiCalendarBlankDuotone className="h-4 w-4" />
           {formatDate(publishedAt)}
         </Card.Eyebrow>
 
-        <span className="flex min-w-20 items-center gap-1 font-sans text-[0.75rem] font-bold tracking-wider text-zinc-600 uppercase lg:text-xs dark:text-zinc-400">
-          <PiClockDuotone className="h-4 w-4" />
+        <span className="h-1 w-1 rounded-full bg-zinc-600 dark:bg-zinc-500" />
+        <span className="flex min-w-20 items-center gap-1 font-sans text-sm font-semibold text-zinc-600 lg:text-sm dark:text-zinc-400">
           {readingTime}
         </span>
         {showTags && (
           <div className="flex items-center gap-2">
-            <PiTagDuotone className="h-4 w-4 text-zinc-600 dark:text-zinc-400" />
             <span
               className={`flex items-center font-sans text-[0.75rem] font-bold tracking-wider text-zinc-600 uppercase lg:text-xs dark:text-zinc-400 ${showPill ? 'hidden md:flex' : ''}`}
             >

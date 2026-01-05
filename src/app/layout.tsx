@@ -82,13 +82,15 @@ export default function RootLayout({
             <Layout>{children}</Layout>
           </div>
         </Providers>
-        <Script
-          data-website-id="bd7f3375-928e-40a7-a1cf-dd5a11e26cf4"
-          src="/umami/script.js"
-          strategy="afterInteractive"
-        />
-        <Script id="umami-outbound-tags" strategy="afterInteractive">
-          {`
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            <Script
+              data-website-id="bd7f3375-928e-40a7-a1cf-dd5a11e26cf4"
+              src="/umami/script.js"
+              strategy="afterInteractive"
+            />
+            <Script id="umami-outbound-tags" strategy="afterInteractive">
+              {`
     (() => {
       const name = 'outbound-link-click';
       const isExternal = (a) => {
@@ -104,7 +106,9 @@ export default function RootLayout({
       });
     })();
   `}
-        </Script>
+            </Script>
+          </>
+        )}
       </body>
     </html>
   );

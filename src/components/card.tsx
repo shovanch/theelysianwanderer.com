@@ -69,7 +69,7 @@ Card.Title = function CardTitle<T extends React.ElementType = 'h2'>({
   const Component = as ?? 'h2';
 
   return (
-    <Component className="relative w-fit text-xl font-semibold tracking-tight text-zinc-800 transition-transform duration-300 ease-in-out group-hover:scale-[102%] md:text-2xl lg:text-3xl dark:text-zinc-100">
+    <Component className="relative w-fit text-xl font-semibold tracking-tight text-zinc-800 transition-colors duration-300 ease-in-out group-hover:text-blue-600 md:text-2xl lg:text-2xl dark:text-zinc-100 dark:group-hover:text-blue-400">
       {href ? <Card.Link href={href}>{children}</Card.Link> : children}
     </Component>
   );
@@ -115,7 +115,7 @@ Card.Eyebrow = function CardEyebrow<T extends React.ElementType = 'p'>({
     <Component
       className={clsx(
         className,
-        'relative z-10 flex min-w-28 items-center font-sans text-[0.75rem] font-bold tracking-wider text-blue-600 uppercase lg:text-xs dark:text-zinc-400',
+        'relative z-10 flex min-w-28 items-center font-sans text-sm font-semibold text-zinc-600 capitalize lg:text-sm dark:text-zinc-400',
         decorate && 'pl-3.5',
       )}
       {...props}
