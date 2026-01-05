@@ -81,7 +81,8 @@ export function SelfieCarousel() {
             bounceStiffness: 600,
             bounceDamping: 30,
           }}
-          onDragEnd={(event, info) => {
+          // @ts-expect-error - motion's DragEventHandler type signature mismatch
+          onDragEnd={(_event, info) => {
             // If dragged left beyond a threshold, loop to the start
             if (info.offset.x < -200) {
               info.point.x = 0;
@@ -91,6 +92,7 @@ export function SelfieCarousel() {
           {[...allImages].map((image, imageIndex) => (
             <m.div
               key={`${image.src}-${imageIndex}`}
+              // @ts-ignore motion/react-m types don't include animation props
               animate={{ opacity: 1, x: 0 }}
               className={clsx(
                 'relative aspect-4/5 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 sm:w-72 sm:rounded-2xl dark:bg-zinc-800',
@@ -98,11 +100,7 @@ export function SelfieCarousel() {
               )}
               initial={{ opacity: 0, x: 50 }}
               style={{
-                rotate:
-                  rotations[imageIndex % rotations.length].replace(
-                    'rotate-',
-                    '',
-                  ) + 'deg',
+                transform: `rotate(${rotations[imageIndex % rotations.length].replace('rotate-', '')}deg)`,
               }}
               transition={{
                 delay: (imageIndex % allImages.length) * 0.1, // Reduced delay for faster initial animation
