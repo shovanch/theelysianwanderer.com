@@ -19,7 +19,7 @@
     "sync-content": "node scripts/sync-content.js",
     "prepare": "husky"
   },
-  "browserslist": "defaults, not ie <= 11",
+  "browserslist": "defaults and fully supports es6-module",
   "dependencies": {
     "@headlessui/react": "^2.2.9",
     "@radix-ui/react-dialog": "^1.1.15",
