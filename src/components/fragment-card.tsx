@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { MarkdownContent } from '~/components/markdown-content';
 import { AsterikIcon } from '~/components/social-icons';
 import { formatDate } from '~/utils/format-date';
@@ -17,10 +18,13 @@ export function FragmentCard({ fragment }: FragmentCardProps) {
     <article className="fragment-item py-8">
       <div className="relative z-10 flex items-center gap-3 font-sans text-sm font-semibold capitalize lg:text-sm">
         {fragment.fragmentCategory && (
-          <span className="flex items-center gap-1 text-amber-600 dark:text-amber-400">
+          <Link
+            href={`/fragments?tags=${fragment.fragmentCategory}`}
+            className="flex items-center gap-1 text-amber-600 hover:text-amber-700 dark:text-amber-400 dark:hover:text-amber-300"
+          >
             <AsterikIcon className="h-4 w-4 fill-current" />
             <span>{fragment.fragmentCategory}</span>
-          </span>
+          </Link>
         )}
         {fragment.fragmentCategory && displayDate && (
           <span className="h-1 w-1 rounded-full bg-zinc-600 dark:bg-zinc-500" />

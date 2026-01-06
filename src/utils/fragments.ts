@@ -101,3 +101,20 @@ export function getFragments(): FragmentData[] {
     return new Date(dateB).getTime() - new Date(dateA).getTime();
   });
 }
+
+export function getFragmentCategories(
+  fragments: FragmentData[],
+): { category: string; count: number }[] {
+  const categoryMap = new Map<string, number>();
+  for (const f of fragments) {
+    if (f.fragmentCategory) {
+      categoryMap.set(
+        f.fragmentCategory,
+        (categoryMap.get(f.fragmentCategory) || 0) + 1,
+      );
+    }
+  }
+  return Array.from(categoryMap.entries())
+    .map(([category, count]) => ({ category, count }))
+    .sort((a, b) => b.count - a.count);
+}
