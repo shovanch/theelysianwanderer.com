@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { type PostData } from '~/utils/posts';
+import { type PostData, type PostMetaOnly } from '~/utils/posts';
 
-export function ReadsGridCard({ post }: { post: PostData }) {
+export function ReadsGridCard({ post }: { post: PostData | PostMetaOnly }) {
   const { slug, subdirectory } = post;
   const { title, coverImage } = post.meta;
 

@@ -8,7 +8,7 @@ import {
   PiTagDuotone,
 } from 'react-icons/pi';
 import { formatDate } from '~/utils/format-date';
-import { type PostData } from '~/utils/posts';
+import { type PostData, type PostMetaOnly } from '~/utils/posts';
 import { Card } from './card';
 
 export function PostCard({
@@ -16,7 +16,7 @@ export function PostCard({
   showPill = false,
   showTags = true,
 }: {
-  post: PostData;
+  post: PostData | PostMetaOnly;
   showPill?: boolean;
   showTags?: boolean;
 }) {

@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { formatDate } from '~/utils/format-date';
-import { type PostData } from '~/utils/posts';
+import { type PostData, type PostMetaOnly } from '~/utils/posts';
 
-export function ReadsListCard({ post }: { post: PostData }) {
+export function ReadsListCard({ post }: { post: PostData | PostMetaOnly }) {
   const { slug, subdirectory } = post;
   const {
     title,

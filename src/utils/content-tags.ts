@@ -1,7 +1,9 @@
-import { PostData } from './posts';
+import { PostData, PostMetaOnly } from './posts';
 
 // Get unique tags and counts from posts
-export function getTagsFromPosts(posts: PostData[]): [string, number][] {
+export function getTagsFromPosts(
+  posts: (PostData | PostMetaOnly)[],
+): [string, number][] {
   const tagCounts: Record<string, number> = {};
 
   posts.forEach((post) => {
@@ -18,7 +20,10 @@ export function getTagsFromPosts(posts: PostData[]): [string, number][] {
 }
 
 // Filter posts by tag
-export function filterPostsByTag(posts: PostData[], tag: string): PostData[] {
+export function filterPostsByTag<T extends PostData | PostMetaOnly>(
+  posts: T[],
+  tag: string,
+): T[] {
   return posts.filter((post) => post.meta.tags && post.meta.tags.includes(tag));
 }
 

@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import { MarkdownContent } from '~/components/markdown-content';
 import { AsterikIcon } from '~/components/social-icons';
+import { getValidDate } from '~/utils/date-utils';
 import { formatDate } from '~/utils/format-date';
-import { getValidDate, type FragmentData } from '~/utils/fragments';
+import type { FragmentData } from '~/types/fragments';
 
 type FragmentCardProps = {
   fragment: FragmentData;
@@ -20,7 +21,7 @@ export function FragmentCard({ fragment }: FragmentCardProps) {
         {fragment.fragmentCategory && (
           <Link
             href={`/fragments?tags=${fragment.fragmentCategory}`}
-            className="flex items-center gap-1 text-amber-600 hover:text-amber-700 dark:text-amber-400 dark:hover:text-amber-300"
+            className="flex items-center gap-1 text-blue-600 hover:text-blue-800 dark:text-amber-400 dark:hover:text-amber-300"
           >
             <AsterikIcon className="h-4 w-4 fill-current" />
             <span>{fragment.fragmentCategory}</span>

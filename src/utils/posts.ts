@@ -55,6 +55,14 @@ export type PostData = {
   content: string;
 };
 
+/** PostData without content - for listing pages */
+export type PostMetaOnly = Omit<PostData, 'content'>;
+
+type GetPostsOptions = {
+  maxItems?: number;
+  includeContent?: boolean;
+};
+
 function getPostsDirectory(subdirectory: Subdirectory) {
   const root = process.cwd();
   return path.join(root, `src/content/${subdirectory}`);
@@ -62,10 +70,6 @@ function getPostsDirectory(subdirectory: Subdirectory) {
 
 export function getFilenames(subdirectory: Subdirectory) {
   const postsDirectory = getPostsDirectory(subdirectory);
-  // return globSync([postsDirectory + '/**/*.md', postsDirectory + '/**/*.mdx'], {
-  //   absolute: false,
-  //   cwd: postsDirectory,
-  // })
 
   return globSync(
     [
@@ -80,13 +84,13 @@ export function getFilenames(subdirectory: Subdirectory) {
   );
 }
 
-export function sortPostsByDate(post1: PostData, post2: PostData): number {
-  // Get the most recent date for each post (updatedAt takes priority over publishedAt)
-  const getRecentDate = (post: PostData) => {
+export function sortPostsByDate(
+  post1: PostData | PostMetaOnly,
+  post2: PostData | PostMetaOnly,
+): number {
+  const getRecentDate = (post: PostData | PostMetaOnly) => {
     const updatedAt = post.meta.updatedAt;
     const publishedAt = post.meta.publishedAt;
-
-    // Use updatedAt if available, otherwise fall back to publishedAt
     const dateToUse = updatedAt || publishedAt;
     return new Date(dateToUse).getTime();
   };
@@ -94,14 +98,23 @@ export function sortPostsByDate(post1: PostData, post2: PostData): number {
   const date1 = getRecentDate(post1);
   const date2 = getRecentDate(post2);
 
-  // Sort in descending order (most recent first)
   return date2 - date1;
 }
 
+// Overloads for getPosts
 export function getPosts(
   subdirectory: Subdirectory,
-  maxItems?: number,
-): PostData[] {
+  options: { maxItems?: number; includeContent: false },
+): PostMetaOnly[];
+export function getPosts(
+  subdirectory: Subdirectory,
+  options?: { maxItems?: number; includeContent?: true },
+): PostData[];
+export function getPosts(
+  subdirectory: Subdirectory,
+  options?: GetPostsOptions,
+): (PostData | PostMetaOnly)[] {
+  const { maxItems, includeContent = true } = options || {};
   const postsDirectory = getPostsDirectory(subdirectory);
 
   if (!fs.existsSync(postsDirectory)) {
@@ -111,17 +124,12 @@ export function getPosts(
 
   const allFiles = globSync([path.join(postsDirectory, '*.md')]);
 
-  // First pass: Read only frontmatter for sorting
-  const fileInfos: {
-    filePath: string;
-    publishedAt: string;
-    updatedAt?: string;
-  }[] = [];
+  const posts: (PostData | PostMetaOnly)[] = [];
 
   for (const filePath of allFiles) {
     try {
       const markdownWithMeta = fs.readFileSync(filePath, 'utf-8');
-      const { data } = matter(markdownWithMeta);
+      const { data, content } = matter(markdownWithMeta);
 
       // Validate required fields
       if (!data.title || !data.publishedAt) {
@@ -133,51 +141,12 @@ export function getPosts(
         continue;
       }
 
-      fileInfos.push({
-        filePath,
-        publishedAt:
-          data.publishedAt instanceof Date
-            ? data.publishedAt.toISOString().split('T')[0]
-            : data.publishedAt,
-        updatedAt: data.updatedAt,
-      });
-    } catch (error) {
-      console.warn(`Error reading frontmatter from ${filePath}:`, error);
-      continue;
-    }
-  }
+      // Process content only if needed
+      const processedContent = includeContent
+        ? processMarkdownImages(content, subdirectory)
+        : content;
 
-  // Sort by date (updatedAt takes priority over publishedAt) and limit if needed
-  const sortedFileInfos = fileInfos.sort((a, b) => {
-    const getRecentDate = (item: {
-      publishedAt: string;
-      updatedAt?: string;
-    }) => {
-      const dateToUse = item.updatedAt || item.publishedAt;
-      return new Date(dateToUse).getTime();
-    };
-
-    return getRecentDate(b) - getRecentDate(a);
-  });
-
-  const filesToProcess = maxItems
-    ? sortedFileInfos.slice(0, maxItems)
-    : sortedFileInfos;
-
-  // Second pass: Fully process only the files we need
-  const posts: PostData[] = [];
-
-  for (const { filePath } of filesToProcess) {
-    try {
-      const markdownWithMeta = fs.readFileSync(filePath, 'utf-8');
-      const { data, content } = matter(markdownWithMeta);
-
-      // Process markdown to fix image paths
-      const processedContent = processMarkdownImages(content, subdirectory);
-
-      const readingTime = readingDuration(processedContent, {
-        emoji: false,
-      });
+      const readingTime = readingDuration(processedContent, { emoji: false });
 
       const fileSlug =
         data.slug || path.basename(filePath, path.extname(filePath));
@@ -204,19 +173,30 @@ export function getPosts(
         readingCompletedAt: data.readingCompletedAt,
       };
 
-      posts.push({
-        meta: postMeta,
-        content: processedContent,
-        slug: fileSlug,
-        subdirectory,
-      });
+      if (includeContent) {
+        posts.push({
+          meta: postMeta,
+          content: processedContent,
+          slug: fileSlug,
+          subdirectory,
+        });
+      } else {
+        posts.push({
+          meta: postMeta,
+          slug: fileSlug,
+          subdirectory,
+        });
+      }
     } catch (error) {
       console.warn(`Error processing file ${filePath}:`, error);
       continue;
     }
   }
 
-  return posts.sort(sortPostsByDate);
+  // Sort by date
+  const sorted = posts.sort(sortPostsByDate);
+
+  return maxItems ? sorted.slice(0, maxItems) : sorted;
 }
 
 export function getPost(
@@ -290,9 +270,9 @@ export function getPost(
 }
 
 export function filterPostsByCategory(
-  posts: PostData[],
+  posts: (PostData | PostMetaOnly)[],
   category: PostCategory,
-): PostData[] {
+): (PostData | PostMetaOnly)[] {
   return posts.filter((post) => {
     return post.meta.category === category;
   });
