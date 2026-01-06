@@ -108,7 +108,7 @@ export function getPhotoGalleries(): PhotoGallery[] {
       galleries.push({
         slug,
         title: data.title || slug,
-        date: data.publishedAt ? String(data.publishedAt).trim() : '',
+        date: data.photoTaken ? String(data.photoTaken).trim() : '',
         location: data.location ? String(data.location).trim() : undefined,
         cover,
         coverSrc: `/images/content/photos/${slug}/${cover}`,

@@ -41,31 +41,37 @@ export default async function PhotoGalleryPage(props: {
   }
 
   return (
-    <Container className="mt-16 pb-8 lg:mt-20">
-      <header className="mb-8">
-        <h1 className="font-serif text-3xl font-medium tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-          {gallery.title}
-        </h1>
-        <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-zinc-600 dark:text-zinc-400">
-          {gallery.date && <time>{formatDate(gallery.date, 'short')}</time>}
-          {/* {gallery.location && (
-            <>
-              <span className="hidden sm:inline">·</span>
-              <span className="flex items-center gap-1">
-                <PiMapPinDuotone className="h-4 w-4" />
-                {gallery.location}
-              </span>
-            </>
-          )} */}
-        </div>
-        {gallery.description && (
-          <p className="mt-4 text-zinc-700 dark:text-zinc-300">
-            {gallery.description}
-          </p>
-        )}
-      </header>
+    <>
+      <Container className="mt-16 pb-24 lg:mt-20">
+        <header className="mb-8">
+          <h1 className="font-serif text-3xl font-medium tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
+            {gallery.title}
+          </h1>
+          <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-zinc-600 dark:text-zinc-400">
+            {gallery.date && <time>{formatDate(gallery.date, 'short')}</time>}
+            {/* {gallery.location && (
+              <>
+                <span className="hidden sm:inline">·</span>
+                <span className="flex items-center gap-1">
+                  <PiMapPinDuotone className="h-4 w-4" />
+                  {gallery.location}
+                </span>
+              </>
+            )} */}
+          </div>
+          {gallery.description && (
+            <p className="mt-4 text-zinc-700 dark:text-zinc-300">
+              {gallery.description}
+            </p>
+          )}
+        </header>
+      </Container>
 
-      <GalleryView images={gallery.images} />
-    </Container>
+      <div className="relative px-4 pb-8 sm:px-8 lg:px-12">
+        <div className="mx-auto max-w-6xl">
+          <GalleryView images={gallery.images} />
+        </div>
+      </div>
+    </>
   );
 }
