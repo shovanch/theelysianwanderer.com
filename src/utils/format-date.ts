@@ -1,4 +1,9 @@
-export function formatDate(dateString: string | Date | undefined | null) {
+type DateFormat = 'full' | 'short';
+
+export function formatDate(
+  dateString: string | Date | undefined | null,
+  format: DateFormat = 'full',
+) {
   if (!dateString) {
     console.warn('formatDate received empty dateString:', dateString);
     return 'Invalid Date';
@@ -21,6 +26,16 @@ export function formatDate(dateString: string | Date | undefined | null) {
   if (isNaN(date.getTime())) {
     console.warn('formatDate received invalid dateString:', dateString);
     return 'Invalid Date';
+  }
+
+  if (format === 'short') {
+    // "March, 2024" format
+    const month = date.toLocaleDateString('en-US', {
+      month: 'long',
+      timeZone: 'UTC',
+    });
+    const year = date.getUTCFullYear();
+    return `${month}, ${year}`;
   }
 
   return date.toLocaleDateString('en-US', {

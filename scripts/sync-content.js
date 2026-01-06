@@ -29,26 +29,59 @@ async function syncContent() {
 
 async function syncAssets() {
   const contentTypes = ['posts', 'notes', 'reads', 'travels'];
-  
+
   // Ensure public content directory exists
   if (!fs.existsSync(PUBLIC_CONTENT_DIR)) {
     fs.mkdirSync(PUBLIC_CONTENT_DIR, { recursive: true });
   }
-  
+
   for (const contentType of contentTypes) {
     const assetsDir = path.join(CONTENT_DIR, contentType, 'assets');
     const publicDir = path.join(PUBLIC_CONTENT_DIR, contentType);
-    
+
     if (fs.existsSync(assetsDir)) {
       // Ensure target directory exists
       if (!fs.existsSync(publicDir)) {
         fs.mkdirSync(publicDir, { recursive: true });
       }
-      
+
       // Copy assets
       execSync(`cp -r "${assetsDir}/"* "${publicDir}/" 2>/dev/null || true`);
       console.log(`   📁 Synced ${contentType} assets`);
     }
+  }
+
+  // Sync photos (different structure - images are in folder root, not assets/)
+  await syncPhotos();
+}
+
+async function syncPhotos() {
+  const photosDir = path.join(CONTENT_DIR, 'photos');
+  const publicPhotosDir = path.join(PUBLIC_CONTENT_DIR, 'photos');
+
+  if (!fs.existsSync(photosDir)) return;
+
+  const folders = fs.readdirSync(photosDir, { withFileTypes: true })
+    .filter(d => d.isDirectory())
+    .map(d => d.name);
+
+  for (const folder of folders) {
+    const srcDir = path.join(photosDir, folder);
+    const destDir = path.join(publicPhotosDir, folder);
+
+    fs.mkdirSync(destDir, { recursive: true });
+
+    // Copy only image files (not index.md)
+    const files = fs.readdirSync(srcDir)
+      .filter(f => /\.(webp|jpg|jpeg|png|gif)$/i.test(f));
+
+    for (const file of files) {
+      fs.copyFileSync(path.join(srcDir, file), path.join(destDir, file));
+    }
+  }
+
+  if (folders.length > 0) {
+    console.log(`   📷 Synced photos (${folders.length} galleries)`);
   }
 }
 

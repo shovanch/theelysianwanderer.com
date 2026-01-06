@@ -24,7 +24,7 @@ export function HomeFragments({
         href="/fragments"
         className="group flex w-max items-center gap-1 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
       >
-        <h2 className="font-sans! text-lg font-semibold text-zinc-500 group-hover:text-blue-600 sm:text-lg dark:text-zinc-100 dark:group-hover:text-blue-400">
+        <h2 className="font-sans! text-lg font-semibold text-zinc-500 group-hover:text-blue-600 sm:text-lg dark:text-zinc-400 dark:group-hover:text-blue-400">
           {title}
         </h2>
         <ArrowRightIcon className="h-4 w-4 fill-zinc-500 transition-transform group-hover:translate-x-0.5 group-hover:fill-blue-600 dark:fill-zinc-400 dark:group-hover:fill-blue-400" />

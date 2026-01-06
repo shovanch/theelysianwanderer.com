@@ -95,7 +95,7 @@ export function PostCard({
         <span className="flex min-w-20 items-center gap-1 font-sans text-sm font-semibold text-zinc-600 lg:text-sm dark:text-zinc-400">
           {readingTime}
         </span>
-        {showTags && (
+        {/* {showTags && (
           <div className="flex items-center gap-2">
             <span
               className={`flex items-center font-sans text-[0.75rem] font-bold tracking-wider text-zinc-600 uppercase lg:text-xs dark:text-zinc-400 ${showPill ? 'hidden md:flex' : ''}`}
@@ -103,7 +103,7 @@ export function PostCard({
               {tag}
             </span>
           </div>
-        )}
+        )} */}
       </div>
     </Card>
   );

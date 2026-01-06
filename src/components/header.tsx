@@ -155,6 +155,7 @@ function MobileNavigation(
             <MobileNavItem href="/writings">Writings</MobileNavItem>
             {/* <MobileNavItem href="/travels">Travels</MobileNavItem> */}
             <MobileNavItem href="/reads">Reads</MobileNavItem>
+            <MobileNavItem href="/photos">Photos</MobileNavItem>
             <MobileNavItem href="/fragments">Fragments</MobileNavItem>
             <div className="flex flex-row gap-8">
               <MobileNavItem
@@ -233,7 +234,8 @@ function NavItem({
   href: string;
   children: React.ReactNode;
 }) {
-  const isActive = usePathname() === href;
+  const pathname = usePathname();
+  const isActive = pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <li>
@@ -264,6 +266,7 @@ function DesktopNavigation(props: React.ComponentPropsWithoutRef<'nav'>) {
         <NavItem href="/writings">Writings</NavItem>
         {/* <NavItem href="/travels">Travels</NavItem> */}
         <NavItem href="/reads">Reads</NavItem>
+        <NavItem href="/photos">Photos</NavItem>
         <NavItem href="/fragments">Fragments</NavItem>
       </ul>
     </nav>

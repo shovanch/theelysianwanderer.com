@@ -81,7 +81,7 @@ export default async function Writings({
               key={`${post.subdirectory}-${post.slug}`}
               className={`py-4 md:py-6 ${index === filteredWritings.length - 1 ? 'border-b-0' : ''}`}
             >
-              <PostCard post={post} showPill={currentType === ''} />
+              <PostCard post={post} />
             </div>
           ))
         ) : (
