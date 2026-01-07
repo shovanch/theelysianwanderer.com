@@ -57,7 +57,7 @@ export function FragmentsView({ fragments, categories }: FragmentsViewProps) {
         </div>
       )}
 
-      <div className="mt-4 divide-y divide-zinc-200/70 dark:divide-zinc-700/50">
+      <div className="mt-10 divide-y divide-zinc-200/70 dark:divide-zinc-700/50">
         {filteredFragments.length > 0 ? (
           filteredFragments.map((fragment) => (
             <FragmentCard fragment={fragment} key={fragment.id} />

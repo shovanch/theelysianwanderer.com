@@ -29,7 +29,7 @@ export default async function Home() {
             <Signature className="h-16 md:h-auto" />
           </div>
           <MarkdownContent className="mt-6" content={heroContent} />
-          <div className="mt-8 lg:mt-12">
+          <div className="mt-8 lg:mt-8">
             <ul
               className="flex items-center gap-5 lg:items-start lg:gap-6"
               role="list"
@@ -71,13 +71,11 @@ export default async function Home() {
       <div className="mt-4 sm:mt-12">
         <PhotosCarousel />
       </div>
-      <Container className="mt-8 md:mt-12">
-        <ExploreLinks />
-      </Container>
       <Container
-        className="mt-8 mb-16 md:mt-16"
-        innerClassName="grid grid-cols-1 md:grid-cols-1 gap-12 md:gap-18"
+        className="mt-4 mb-16 md:mt-8"
+        innerClassName="grid grid-cols-1 md:grid-cols-1 gap-12 md:gap-12"
       >
+        <ExploreLinks />
         <HomeListing />
         <HomeFragments />
       </Container>

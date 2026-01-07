@@ -16,7 +16,7 @@ export function FragmentCard({ fragment }: FragmentCardProps) {
   const displayDate = publishedAt || updatedAt;
 
   return (
-    <article className="fragment-item py-8">
+    <article className="fragment-item">
       <div className="relative z-10 flex items-center gap-3 font-sans text-sm font-semibold capitalize lg:text-sm">
         {fragment.fragmentCategory && (
           <Link
@@ -38,7 +38,7 @@ export function FragmentCard({ fragment }: FragmentCardProps) {
         </time>
       </div>
 
-      <div className="mt-4 text-zinc-700 dark:text-zinc-300">
+      <div className="mt-2 text-zinc-700 dark:text-zinc-300 [&>div>*:last-child]:mb-0">
         <MarkdownContent content={fragment.content} />
       </div>
     </article>

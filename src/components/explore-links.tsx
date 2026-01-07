@@ -32,8 +32,8 @@ const exploreLinks = [
 
 export function ExploreLinks() {
   return (
-    <section className="mt-8 flex flex-col gap-4" id="explore">
-      <h2 className="font-sans! text-lg font-semibold text-zinc-500 sm:text-lg dark:text-zinc-400">
+    <section className="mt-8 flex flex-col gap-4 md:gap-4" id="explore">
+      <h2 className="font-sans! text-base font-semibold text-zinc-500 sm:text-lg dark:text-zinc-400">
         Explore
       </h2>
       <ul className="flex flex-col gap-2">
