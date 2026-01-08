@@ -36,23 +36,49 @@ async function syncAssets() {
   }
 
   for (const contentType of contentTypes) {
-    const assetsDir = path.join(CONTENT_DIR, contentType, 'assets');
+    const contentTypeDir = path.join(CONTENT_DIR, contentType);
     const publicDir = path.join(PUBLIC_CONTENT_DIR, contentType);
 
-    if (fs.existsSync(assetsDir)) {
-      // Ensure target directory exists
-      if (!fs.existsSync(publicDir)) {
-        fs.mkdirSync(publicDir, { recursive: true });
-      }
-
-      // Copy assets
-      execSync(`cp -r "${assetsDir}/"* "${publicDir}/" 2>/dev/null || true`);
-      console.log(`   📁 Synced ${contentType} assets`);
+    // Ensure target directory exists
+    if (!fs.existsSync(publicDir)) {
+      fs.mkdirSync(publicDir, { recursive: true });
     }
+
+    // Sync top-level assets directory
+    const assetsDir = path.join(contentTypeDir, 'assets');
+    if (fs.existsSync(assetsDir)) {
+      execSync(`cp -r "${assetsDir}/"* "${publicDir}/" 2>/dev/null || true`);
+    }
+
+    // Sync nested assets directories (e.g., notes/music-theory/assets/)
+    await syncNestedAssets(contentTypeDir, publicDir);
+
+    console.log(`   📁 Synced ${contentType} assets`);
   }
 
   // Sync photos (different structure - images are in folder root, not assets/)
   await syncPhotos();
+}
+
+async function syncNestedAssets(contentTypeDir, publicDir) {
+  if (!fs.existsSync(contentTypeDir)) return;
+
+  const entries = fs.readdirSync(contentTypeDir, { withFileTypes: true });
+
+  for (const entry of entries) {
+    if (entry.isDirectory() && entry.name !== 'assets' && !entry.name.startsWith('.')) {
+      const subDir = path.join(contentTypeDir, entry.name);
+      const nestedAssetsDir = path.join(subDir, 'assets');
+
+      if (fs.existsSync(nestedAssetsDir)) {
+        // Copy nested assets to public directory
+        execSync(`cp -r "${nestedAssetsDir}/"* "${publicDir}/" 2>/dev/null || true`);
+      }
+
+      // Recursively check for deeper nested assets
+      await syncNestedAssets(subDir, publicDir);
+    }
+  }
 }
 
 async function syncPhotos() {
