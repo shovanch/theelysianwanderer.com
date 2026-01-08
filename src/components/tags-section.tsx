@@ -45,7 +45,11 @@ export function TagsSection({
                 className={`flex items-center gap-1 rounded-full bg-zinc-200/50 px-3 py-2 text-xs font-medium transition-all duration-300 hover:bg-zinc-300/50 md:py-1 md:text-base dark:bg-zinc-800 dark:hover:bg-zinc-700 ${
                   isActive ? 'bg-zinc-400/80 dark:bg-zinc-500/80' : ''
                 }`}
-                href={isActive ? basePath : `${basePath}?tags=${tag}`}
+                href={
+                  isActive
+                    ? basePath
+                    : `${basePath}${basePath.includes('?') ? '&' : '?'}tags=${tag}`
+                }
               >
                 {formatTag(tag)}
                 <sup className="mt-1 ml-1 text-sm opacity-50 md:text-sm">
@@ -69,7 +73,11 @@ export function TagsSection({
                 className={`flex items-center gap-1 rounded-full bg-zinc-200/50 px-3 py-2 text-xs font-medium transition-all duration-300 hover:bg-zinc-300/50 md:py-1 md:text-base dark:bg-zinc-800 dark:hover:bg-zinc-700 ${
                   isActive ? 'bg-zinc-400/80 dark:bg-zinc-500/80' : ''
                 }`}
-                href={isActive ? basePath : `${basePath}?tags=${tag}`}
+                href={
+                  isActive
+                    ? basePath
+                    : `${basePath}${basePath.includes('?') ? '&' : '?'}tags=${tag}`
+                }
                 style={{
                   transitionDelay: `${index * 50}ms`,
                 }}

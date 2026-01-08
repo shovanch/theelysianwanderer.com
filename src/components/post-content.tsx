@@ -6,11 +6,14 @@ import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import { rehypeImageGrid } from '~/lib/rehype-image-grid';
+import { remarkResolveNoteLinks } from '~/lib/remark-resolve-note-links';
 import type { PostData } from '~/utils/posts';
 import { ImageGrid, LandscapeImage, PotraitImage } from './image-grid';
 
 type PostContentProps = {
   post: PostData;
+  /** For notes: the relative path of the current file (e.g., "chess/index.md") */
+  currentPath?: string;
 };
 
 const components: MDXComponents = {
@@ -19,10 +22,21 @@ const components: MDXComponents = {
   ImageGrid: ImageGrid,
 };
 
-export function PostContent({ post }: PostContentProps) {
+export function PostContent({ post, currentPath }: PostContentProps) {
+  // Build remark plugins list
+  const remarkPlugins: unknown[] = [remarkGfm, remarkMath];
+
+  // Add note link resolution for notes with a currentPath
+  if (post.subdirectory === 'notes' && currentPath) {
+    remarkPlugins.push([
+      remarkResolveNoteLinks,
+      { currentPath, subdirectory: 'notes' },
+    ]);
+  }
+
   const options = {
     mdxOptions: {
-      remarkPlugins: [remarkGfm, remarkMath],
+      remarkPlugins,
       rehypePlugins: [
         rehypeKatex,
         rehypeSlug,
