@@ -6,6 +6,9 @@ export type ContentType = 'posts' | 'travels' | 'reads' | 'notes';
 /** Content status options from Obsidian */
 export type ContentStatus = 'Not started' | 'In progress' | 'Complete';
 
+/** Surfaces where content can appear */
+export type ContentSurface = 'notes' | 'home' | 'search';
+
 /** Content metadata matching Obsidian frontmatter format */
 export type ContentMeta = {
   title: string;
@@ -22,6 +25,7 @@ export type ContentMeta = {
   author?: string;
   readingStartedAt?: string;
   readingCompletedAt?: string;
+  surfaces?: ContentSurface[];
 };
 
 /** Tag interface for tag listings */

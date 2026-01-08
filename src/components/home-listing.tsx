@@ -39,7 +39,7 @@ export function HomeListing({
         {allWritings.map((post) => (
           <div
             key={`${post.subdirectory}-${post.slug}`}
-            className="py-4 first:pt-0 last:pb-0 md:py-3"
+            className="py-4 first:pt-0 last:pb-0 md:py-2"
           >
             <PostCard post={post} showTags={false} showMetadata={false} />
           </div>

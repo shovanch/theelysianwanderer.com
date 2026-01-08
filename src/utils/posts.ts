@@ -4,9 +4,14 @@ import { globSync } from 'glob';
 import matter from 'gray-matter';
 import readingDuration from 'reading-duration';
 import { isDevEnv } from '~/utils/is-dev-env';
+import { getIndexNotes } from '~/utils/notes-manifest';
+import type { NoteEntry } from '~/types/notes';
 
 // Function to rewrite relative image paths to use public directory
-function processMarkdownImages(content: string, subdirectory: string): string {
+export function processMarkdownImages(
+  content: string,
+  subdirectory: string,
+): string {
   // Replace relative image paths with public URLs
   return content
     .replace(
@@ -63,6 +68,45 @@ type GetPostsOptions = {
   includeContent?: boolean;
 };
 
+// Helper to convert NoteEntry to PostData/PostMetaOnly format
+function noteEntryToPost(
+  entry: NoteEntry,
+  includeContent: boolean,
+): PostData | PostMetaOnly {
+  const processedContent = processMarkdownImages(entry.body, 'notes');
+  const readingTime = readingDuration(processedContent, { emoji: false });
+
+  const postMeta: PostMeta = {
+    publishedAt: entry.frontmatter.publishedAt || '',
+    updatedAt: entry.frontmatter.updatedAt,
+    title: entry.title,
+    summary: entry.frontmatter.summary || '',
+    tags: entry.frontmatter.tags || [],
+    coverImage: entry.frontmatter.coverImage,
+    category: 'notes',
+    isPublished: entry.frontmatter.isPublished,
+    published: entry.frontmatter.isPublished,
+    readingTime,
+    slug: entry.canonicalRoute,
+    showToc: entry.frontmatter.showToc,
+  };
+
+  if (includeContent) {
+    return {
+      meta: postMeta,
+      content: processedContent,
+      slug: entry.canonicalRoute,
+      subdirectory: 'notes',
+    };
+  }
+
+  return {
+    meta: postMeta,
+    slug: entry.canonicalRoute,
+    subdirectory: 'notes',
+  };
+}
+
 function getPostsDirectory(subdirectory: Subdirectory) {
   const root = process.cwd();
   return path.join(root, `src/content/${subdirectory}`);
@@ -115,6 +159,14 @@ export function getPosts(
   options?: GetPostsOptions,
 ): (PostData | PostMetaOnly)[] {
   const { maxItems, includeContent = true } = options || {};
+
+  // Use manifest system for notes to support nested directories
+  if (subdirectory === 'notes') {
+    const notes = getIndexNotes();
+    const posts = notes.map((entry) => noteEntryToPost(entry, includeContent));
+    return maxItems ? posts.slice(0, maxItems) : posts;
+  }
+
   const postsDirectory = getPostsDirectory(subdirectory);
 
   if (!fs.existsSync(postsDirectory)) {
