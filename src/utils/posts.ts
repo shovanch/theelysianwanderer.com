@@ -132,16 +132,13 @@ export function sortPostsByDate(
   post1: PostData | PostMetaOnly,
   post2: PostData | PostMetaOnly,
 ): number {
-  const getRecentDate = (post: PostData | PostMetaOnly) => {
-    const updatedAt = post.meta.updatedAt;
-    const publishedAt = post.meta.publishedAt;
-    const dateToUse = updatedAt || publishedAt;
-    return new Date(dateToUse).getTime();
+  const getTime = (dateStr: string | undefined) => {
+    if (!dateStr) return 0;
+    const time = new Date(dateStr).getTime();
+    return Number.isNaN(time) ? 0 : time;
   };
-
-  const date1 = getRecentDate(post1);
-  const date2 = getRecentDate(post2);
-
+  const date1 = getTime(post1.meta.publishedAt);
+  const date2 = getTime(post2.meta.publishedAt);
   return date2 - date1;
 }
 

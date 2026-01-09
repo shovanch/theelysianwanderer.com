@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 /* Load plugins from CSS instead of require() */
-@plugin "@tailwindcss/typography";
+@plugin '@tailwindcss/typography';
 
 /* Dark variant - replaces darkMode: "selector" from v3 config */
 @variant dark (&:where(.dark, .dark *));
@@ -53,7 +53,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 body {
-  @apply bg-[#fef9f6] font-serif text-xl/relaxed text-black md:text-xl/relaxed dark:bg-[#111110] dark:text-[#eee];
+  @apply bg-[#fff1e5] font-serif text-xl/relaxed text-black md:text-xl/relaxed dark:bg-[#111110] dark:text-[#eee];
 }
 
 h1,

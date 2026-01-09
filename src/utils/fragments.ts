@@ -64,10 +64,10 @@ export function getFragments(): FragmentData[] {
     }
   }
 
-  // Sort by updatedAt or publishedAt, newest first
+  // Sort by publishedAt, newest first
   return fragments.sort((a, b) => {
-    const dateA = getValidDate(a.updatedAt) || getValidDate(a.publishedAt);
-    const dateB = getValidDate(b.updatedAt) || getValidDate(b.publishedAt);
+    const dateA = getValidDate(a.publishedAt);
+    const dateB = getValidDate(b.publishedAt);
 
     if (!dateA && !dateB) return 0;
     if (!dateA) return 1;
