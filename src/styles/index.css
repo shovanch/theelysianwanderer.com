@@ -8,6 +8,9 @@
 
 /* Theme tokens - replaces theme object from v3 config */
 @theme {
+  /* Font size override */
+  --text-xl: 1.375rem;
+
   /* Font families */
   --font-sans:
     var(--font-inter), ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
@@ -57,7 +60,7 @@ html {
   @apply bg-amber-700 text-white dark:bg-amber-800;
 }
 body {
-  @apply bg-[#fff1e5] font-serif text-xl/relaxed text-zinc-900 md:text-xl/relaxed dark:bg-[#111110] dark:text-zinc-100;
+  @apply bg-[#fff1e5] font-serif text-xl/relaxed text-zinc-900 dark:bg-[#111110] dark:text-zinc-100;
 }
 
 h1,
@@ -67,6 +70,10 @@ h3 {
 }
 
 /* Typography/Prose styles - replaces typographyStyles() function */
+.prose-xl,
+.prose-xl :where(p, ul, ol, blockquote):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+  font-size: 1.375rem;
+}
 
 /* Overrides for Katex */
 .katex {
