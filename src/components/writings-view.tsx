@@ -69,13 +69,6 @@ export function WritingsView({ writings }: WritingsViewProps) {
         currentTag={currentTag}
       />
 
-      {/* Tags Section */}
-      <TagsSection
-        basePath={currentType ? `/writings?type=${currentType}` : '/writings'}
-        currentTag={currentTag}
-        tagsData={tagsData}
-      />
-
       {/* Page Title */}
       <h2 className="font-serif text-3xl font-medium tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
         {getTitle()}{' '}
@@ -83,6 +76,13 @@ export function WritingsView({ writings }: WritingsViewProps) {
           {filteredWritings.length}
         </sup>
       </h2>
+
+      {/* Tags Section */}
+      <TagsSection
+        basePath={currentType ? `/writings?type=${currentType}` : '/writings'}
+        currentTag={currentTag}
+        tagsData={tagsData}
+      />
 
       {/* Posts List */}
       <div className="mt-4 divide-y divide-zinc-200/70 border-zinc-200/70 dark:divide-zinc-700/50 dark:border-zinc-700/50">

@@ -52,8 +52,12 @@ html {
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
 }
+
+::selection {
+  @apply bg-amber-700 text-white dark:bg-amber-800;
+}
 body {
-  @apply bg-[#fff1e5] font-serif text-xl/relaxed text-black md:text-xl/relaxed dark:bg-[#111110] dark:text-[#eee];
+  @apply bg-[#fff1e5] font-serif text-xl/relaxed text-zinc-900 md:text-xl/relaxed dark:bg-[#111110] dark:text-zinc-100;
 }
 
 h1,
@@ -105,4 +109,20 @@ h4:hover .anchor-link {
 
 .header-anchor {
   @apply ml-2 no-underline opacity-50 transition-opacity hover:opacity-100;
+}
+
+/* Sidenote styles - margin notes for posts */
+.sidenote {
+  @apply my-4 py-3 pr-4 pl-4 text-lg leading-relaxed text-neutral-400! dark:text-zinc-600;
+}
+
+.sidenote p {
+  @apply m-0! opacity-70 dark:opacity-80;
+}
+
+/* Desktop: position sidenotes in the right margin */
+@media (min-width: 1280px) {
+  .sidenote {
+    @apply float-right clear-right mt-1 -mr-64 mb-4 w-55 rounded-none border-none bg-transparent p-0 text-lg/relaxed;
+  }
 }

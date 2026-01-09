@@ -7,6 +7,7 @@ import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import { rehypeImageGrid } from '~/lib/rehype-image-grid';
 import { remarkResolveNoteLinks } from '~/lib/remark-resolve-note-links';
+import { remarkSidenotes } from '~/lib/remark-sidenotes';
 import type { PostData } from '~/utils/posts';
 import { ImageGrid, LandscapeImage, PotraitImage } from './image-grid';
 
@@ -24,7 +25,7 @@ const components: MDXComponents = {
 
 export function PostContent({ post, currentPath }: PostContentProps) {
   // Build remark plugins list
-  const remarkPlugins: unknown[] = [remarkGfm, remarkMath];
+  const remarkPlugins: unknown[] = [remarkGfm, remarkMath, remarkSidenotes];
 
   // Add note link resolution for notes with a currentPath
   if (post.subdirectory === 'notes' && currentPath) {

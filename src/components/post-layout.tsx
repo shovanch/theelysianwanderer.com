@@ -29,7 +29,7 @@ export function PostLayout({
 
       <Container className="mt-16 lg:mt-24" innerClassName="max-w-4xl">
         {/* Main Content - centered as normal */}
-        <article className="mx-auto flex max-w-3xl flex-col items-center">
+        <article className="mx-auto flex max-w-2xl flex-col items-center overflow-visible">
           <header className="flex w-full flex-col items-start md:items-center">
             {/* Metadata Row */}
             <div className="flex flex-wrap items-center gap-2 self-start md:self-center lg:gap-4">

@@ -35,19 +35,19 @@ export const MarkdownContent = ({
 
           // Paragraphs
           p: ({ children }) => (
-            <p className="mb-4 leading-relaxed font-normal text-black dark:text-zinc-300">
+            <p className="mb-4 leading-relaxed font-normal text-zinc-900 dark:text-zinc-100">
               {children}
             </p>
           ),
 
           // Lists
           ul: ({ children }) => (
-            <ul className="mb-4 ml-4 list-disc space-y-1 text-black dark:text-zinc-300">
+            <ul className="mb-4 ml-4 list-disc space-y-1 text-zinc-900 dark:text-zinc-300">
               {children}
             </ul>
           ),
           ol: ({ children }) => (
-            <ol className="mb-4 ml-4 list-decimal space-y-1 text-black dark:text-zinc-300">
+            <ol className="mb-4 ml-4 list-decimal space-y-1 text-zinc-900 dark:text-zinc-300">
               {children}
             </ol>
           ),

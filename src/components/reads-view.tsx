@@ -59,13 +59,6 @@ export function ReadsView({ posts }: ReadsViewProps) {
 
   return (
     <>
-      {/* Tags Section */}
-      <TagsSection
-        basePath="/reads"
-        currentTag={currentTag}
-        tagsData={tagsData}
-      />
-
       {/* Page Title */}
       {currentTag ? (
         <h2 className="font-serif text-3xl font-medium tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
@@ -82,6 +75,13 @@ export function ReadsView({ posts }: ReadsViewProps) {
           </sup>
         </h2>
       )}
+
+      {/* Tags Section */}
+      <TagsSection
+        basePath="/reads"
+        currentTag={currentTag}
+        tagsData={tagsData}
+      />
 
       {/* Posts with View Toggle */}
       <div className="mt-4">

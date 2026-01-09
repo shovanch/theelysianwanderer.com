@@ -30,8 +30,7 @@ export function TagsSection({
   const hasMoreTags = tagsData.length > 7;
 
   return (
-    <div className="mt-4 mb-8">
-      <h3 className="mb-2 text-xl font-semibold md:text-2xl">Topics</h3>
+    <div className="mt-4 mb-6">
       <div className="flex flex-wrap gap-2">
         {/* Desktop: show all tags, Mobile: show limited tags */}
         <div className="hidden md:contents">

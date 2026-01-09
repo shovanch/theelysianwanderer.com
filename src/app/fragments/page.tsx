@@ -14,7 +14,7 @@ export default function Fragments() {
   const categories = getFragmentCategories(allFragments);
 
   return (
-    <Container className="mt-16 pb-8 lg:mt-20">
+    <Container className="mt-16 pb-8 lg:mt-20" innerClassName="max-w-2xl!">
       <Suspense fallback={<FragmentsLoading />}>
         <FragmentsView fragments={allFragments} categories={categories} />
       </Suspense>
