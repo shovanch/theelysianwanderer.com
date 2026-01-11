@@ -1,4 +1,5 @@
 import { MDXComponents } from 'mdx/types';
+import dynamic from 'next/dynamic';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeKatex from 'rehype-katex';
@@ -11,6 +12,8 @@ import { remarkSidenotes } from '~/lib/remark-sidenotes';
 import type { PostData } from '~/utils/posts';
 import { ImageGrid, LandscapeImage, PotraitImage } from './image-grid';
 
+const YouTube = dynamic(() => import('./youtube').then((mod) => mod.YouTube));
+
 type PostContentProps = {
   post: PostData;
   /** For notes: the relative path of the current file (e.g., "chess/index.md") */
@@ -21,6 +24,7 @@ const components: MDXComponents = {
   LandscapeImage: LandscapeImage,
   PotraitImage: PotraitImage,
   ImageGrid: ImageGrid,
+  YouTube: YouTube,
 };
 
 export function PostContent({ post, currentPath }: PostContentProps) {

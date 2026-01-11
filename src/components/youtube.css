@@ -1,0 +1,15 @@
+lite-youtube {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 0.5rem;
+}
+
+lite-youtube::before {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    transparent 20%,
+    transparent 80%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+}

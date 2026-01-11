@@ -29,6 +29,7 @@
     "cmdk": "^1.1.1",
     "glob": "^13.0.0",
     "gray-matter": "^4.0.3",
+    "lite-youtube-embed": "^0.3.4",
     "motion": "^12.23.28",
     "next": "^16.1.1",
     "next-mdx-remote": "^5.0.0",
