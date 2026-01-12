@@ -22,13 +22,16 @@ export function WritingsView({ writings }: WritingsViewProps) {
   const currentTag = searchParams.get('tags') || '';
   const currentType = searchParams.get('type') || '';
 
-  // Filter by type (essays = posts, notes = notes)
+  // Filter by type (essays = posts, notes = notes, travels = travels)
   const typeFilteredWritings = useMemo(() => {
     if (currentType === 'essays') {
       return writings.filter((w) => w.subdirectory === 'posts');
     }
     if (currentType === 'notes') {
       return writings.filter((w) => w.subdirectory === 'notes');
+    }
+    if (currentType === 'travels') {
+      return writings.filter((w) => w.subdirectory === 'travels');
     }
     return writings;
   }, [writings, currentType]);
@@ -57,6 +60,7 @@ export function WritingsView({ writings }: WritingsViewProps) {
     if (currentTag) return formatTag(currentTag);
     if (currentType === 'essays') return 'Essays';
     if (currentType === 'notes') return 'Notes';
+    if (currentType === 'travels') return 'Travels';
     return 'Writings';
   };
 

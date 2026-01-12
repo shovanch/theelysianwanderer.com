@@ -10,6 +10,7 @@ const types = [
   { value: '', label: 'All' },
   { value: 'essays', label: 'Essays' },
   { value: 'notes', label: 'Notes' },
+  { value: 'travels', label: 'Travels' },
 ];
 
 export function TypeFilter({
@@ -18,7 +19,7 @@ export function TypeFilter({
   currentTag,
 }: TypeFilterProps) {
   return (
-    <div className="mb-6 flex items-center gap-1 text-base">
+    <div className="mb-6 flex items-center gap-1 text-lg">
       {types.map(({ value, label }, index) => {
         const isActive = currentType === value;
         // Preserve tag param when switching type

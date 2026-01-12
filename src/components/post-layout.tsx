@@ -52,7 +52,7 @@ export function PostLayout({
 
             <h1
               data-pagefind-body
-              className="font-serif-title mt-2 mb-8 text-left text-3xl font-bold tracking-tight text-zinc-800 md:mt-4 md:text-center lg:text-5xl dark:text-zinc-100"
+              className="font-serif-title mt-2 mb-8 text-left text-3xl font-medium tracking-tight text-zinc-800 md:mt-4 md:text-center lg:text-5xl dark:text-zinc-100"
             >
               {post.title}
             </h1>

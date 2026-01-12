@@ -21,6 +21,7 @@ export function DynamicTOC({ postData, readingTime }: DynamicTOCProps) {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [selectedHeadingIndex, setSelectedHeadingIndex] = useState(0);
+  const [isMinimized, setIsMinimized] = useState(false);
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -67,6 +68,7 @@ export function DynamicTOC({ postData, readingTime }: DynamicTOCProps) {
   useEffect(() => {
     let ticking = false;
     let timeoutId: NodeJS.Timeout;
+    let scrollStopTimeoutId: NodeJS.Timeout;
 
     const calculateProgress = () => {
       if (typeof window === 'undefined' || typeof document === 'undefined')
@@ -138,6 +140,12 @@ export function DynamicTOC({ postData, readingTime }: DynamicTOCProps) {
         requestAnimationFrame(calculateProgress);
         ticking = true;
       }
+
+      // Clear existing timeout and set new one to minimize after scrolling stops for 3 seconds
+      clearTimeout(scrollStopTimeoutId);
+      scrollStopTimeoutId = setTimeout(() => {
+        setIsMinimized(true);
+      }, 3000);
     };
 
     const handleResize = () => {
@@ -153,6 +161,7 @@ export function DynamicTOC({ postData, readingTime }: DynamicTOCProps) {
 
     return () => {
       clearTimeout(timeoutId);
+      clearTimeout(scrollStopTimeoutId);
       if (typeof window !== 'undefined') {
         window.removeEventListener('scroll', handleScroll);
         window.removeEventListener('resize', handleResize);
@@ -222,7 +231,7 @@ export function DynamicTOC({ postData, readingTime }: DynamicTOCProps) {
     };
   }, [isVisible, selectedHeadingIndex, allHeadings, isMobileOpen]);
 
-  const handleHeadingClick = (slug: string) => {
+  const handleHeadingClick = (slug: string, minimizeAfter = false) => {
     if (typeof document === 'undefined') return;
 
     const element = document.getElementById(slug);
@@ -231,6 +240,11 @@ export function DynamicTOC({ postData, readingTime }: DynamicTOCProps) {
         behavior: 'smooth',
         block: 'start',
       });
+
+      // Minimize TOC after clicking a heading (desktop behavior)
+      if (minimizeAfter) {
+        setIsMinimized(true);
+      }
     }
   };
 
@@ -257,7 +271,7 @@ export function DynamicTOC({ postData, readingTime }: DynamicTOCProps) {
                 ? 'bg-blue-50/70 font-medium text-blue-600 dark:bg-blue-950/50 dark:text-blue-400'
                 : 'text-zinc-600 dark:text-zinc-400'
             } ${level > 0 ? 'ml-4' : ''}`}
-            onClick={() => handleHeadingClick(heading.slug)}
+            onClick={() => handleHeadingClick(heading.slug, true)}
           >
             <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">
               {heading.text}
@@ -299,14 +313,25 @@ export function DynamicTOC({ postData, readingTime }: DynamicTOCProps) {
       {/* Desktop TOC */}
       <nav
         aria-label="Table of contents"
-        className={`fixed bottom-6 left-6 z-10 max-w-64 transition-opacity duration-500 ease-out ${
+        className={`fixed bottom-6 left-6 z-10 transition-opacity duration-500 ease-out ${
           isVisible ? 'opacity-100' : 'opacity-0'
         } hidden xl:block`}
       >
-        <div className="max-h-[70vh] w-full overflow-x-hidden overflow-y-auto p-4 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:rounded-xs [&::-webkit-scrollbar-thumb]:bg-gray-400 dark:[&::-webkit-scrollbar-thumb]:bg-gray-600 [&::-webkit-scrollbar-thumb:hover]:bg-gray-500 dark:[&::-webkit-scrollbar-thumb:hover]:bg-gray-500 [&::-webkit-scrollbar-track]:bg-transparent">
-          <div className="mb-3 -ml-1.5 flex items-center gap-2">
-            {/* Simple circular progress indicator */}
-            <div className="relative h-4 w-4">
+        <div className="p-4">
+          {/* Header with clickable progress circle */}
+          <button
+            aria-label={
+              isMinimized
+                ? 'Expand table of contents'
+                : 'Collapse table of contents'
+            }
+            className="mb-3 -ml-1.5 flex cursor-pointer items-center gap-2 rounded-md px-1.5 py-1 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800"
+            onClick={() => setIsMinimized(!isMinimized)}
+          >
+            {/* Circular progress indicator */}
+            <div
+              className={`relative transition-all duration-300 ${isMinimized ? 'h-6 w-6' : 'h-4 w-4'}`}
+            >
               <svg
                 className="h-full w-full -rotate-90 transform"
                 viewBox="0 0 32 32"
@@ -338,13 +363,45 @@ export function DynamicTOC({ postData, readingTime }: DynamicTOCProps) {
                 />
               </svg>
             </div>
-            <h3 className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">
+            <span
+              className={`text-sm font-semibold text-zinc-800 transition-all duration-300 dark:text-zinc-200 ${
+                isMinimized
+                  ? 'w-0 overflow-hidden opacity-0'
+                  : 'w-auto opacity-100'
+              }`}
+            >
               On this page
-            </h3>
+            </span>
+            {/* Chevron indicator */}
+            <svg
+              className={`h-3 w-3 text-zinc-400 transition-all duration-300 dark:text-zinc-500 ${
+                isMinimized ? 'w-0 opacity-0' : 'opacity-100'
+              }`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 9l-7 7-7-7"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+              />
+            </svg>
+          </button>
+
+          {/* Heading list with expand/collapse animation */}
+          <div
+            className={`overflow-hidden transition-all duration-300 ease-out ${
+              isMinimized ? 'max-h-0 opacity-0' : 'max-h-[60vh] opacity-100'
+            }`}
+          >
+            <div className="max-h-[60vh] max-w-64 overflow-x-hidden overflow-y-auto [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:rounded-xs [&::-webkit-scrollbar-thumb]:bg-gray-400 dark:[&::-webkit-scrollbar-thumb]:bg-gray-600 [&::-webkit-scrollbar-thumb:hover]:bg-gray-500 dark:[&::-webkit-scrollbar-thumb:hover]:bg-gray-500 [&::-webkit-scrollbar-track]:bg-transparent">
+              <ul className="space-y-1">
+                {headings.map((heading) => renderHeading(heading))}
+              </ul>
+            </div>
           </div>
-          <ul className="space-y-1">
-            {headings.map((heading) => renderHeading(heading))}
-          </ul>
         </div>
       </nav>
 

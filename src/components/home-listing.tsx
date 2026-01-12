@@ -45,6 +45,12 @@ export function HomeListing({
           </div>
         ))}
       </div>
+      <Link
+        href="/writings"
+        className="text-base text-zinc-500 italic hover:text-blue-600 dark:text-zinc-400 dark:hover:text-blue-400"
+      >
+        View more
+      </Link>
     </div>
   );
 }

@@ -9,7 +9,8 @@
 /* Theme tokens - replaces theme object from v3 config */
 @theme {
   /* Font size override */
-  --text-xl: 1.375rem;
+  /* 21px */
+  --text-xl: 1.3125rem;
 
   /* Font families */
   --font-sans:
@@ -71,8 +72,11 @@ h3 {
 
 /* Typography/Prose styles - replaces typographyStyles() function */
 .prose-xl,
-.prose-xl :where(p, ul, ol, blockquote):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-  font-size: 1.375rem;
+.prose-xl
+  :where(p, ul, ol, blockquote):not(
+    :where([class~='not-prose'], [class~='not-prose'] *)
+  ) {
+  font-size: 1.3125rem;
 }
 
 /* Overrides for Katex */
@@ -80,7 +84,7 @@ h3 {
   margin-top: 2rem !important;
   margin-bottom: 2rem !important;
   font:
-    normal 1.375rem KaTeX_Main,
+    normal 1.3125rem KaTeX_Main,
     Times New Roman,
     serif !important;
 }
