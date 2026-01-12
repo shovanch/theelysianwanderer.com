@@ -35,7 +35,7 @@ export function HomeListing({
         </h2>
         <ArrowRightIcon className="fill-icon-muted group-hover:fill-accent h-4 w-4 transition-transform group-hover:translate-x-0.5" />
       </Link>
-      <div className="divide-border-muted divide-y md:divide-y-0">
+      <div className="divide-border-muted/80 divide-y md:divide-y-0">
         {allWritings.map((post) => (
           <div
             key={`${post.subdirectory}-${post.slug}`}

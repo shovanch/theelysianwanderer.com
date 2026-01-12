@@ -89,12 +89,12 @@ export function WritingsView({ writings }: WritingsViewProps) {
       />
 
       {/* Posts List */}
-      <div className="divide-border-muted border-border-muted mt-4 divide-y">
+      <div className="divide-border-muted/80 border-border-muted/80 mt-4 divide-y">
         {filteredWritings.length > 0 ? (
           filteredWritings.map((post, index) => (
             <div
               key={`${post.subdirectory}-${post.slug}`}
-              className={`py-4 md:py-6 ${index === filteredWritings.length - 1 ? 'border-b-0' : ''}`}
+              className={`py-4 md:py-5 ${index === filteredWritings.length - 1 ? 'border-b-0' : ''}`}
             >
               <PostCard post={post} />
             </div>

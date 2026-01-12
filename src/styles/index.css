@@ -135,7 +135,7 @@ html {
   @apply bg-selection-bg text-selection-text;
 }
 body {
-  @apply bg-bg-body font-serif text-xl/relaxed text-text-primary;
+  @apply bg-bg-body text-text-primary font-serif text-xl/relaxed;
 }
 
 h1,
@@ -198,7 +198,7 @@ h4:hover .anchor-link {
 
 /* Sidenote styles - margin notes for posts */
 .sidenote {
-  @apply my-4 py-3 pr-4 pl-4 text-lg leading-relaxed text-sidenote;
+  @apply text-sidenote my-4 py-3 pr-4 pl-4 text-lg leading-relaxed;
 }
 
 .sidenote p {
