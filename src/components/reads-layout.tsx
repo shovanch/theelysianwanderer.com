@@ -74,7 +74,7 @@ export function ReadsLayout({
             {/* Title */}
             <h1
               data-pagefind-body
-              className="font-serif-title mb-4 text-left text-3xl font-medium tracking-tight text-zinc-800 md:text-center lg:text-5xl dark:text-zinc-100"
+              className="font-serif-title text-text-primary mb-4 text-left text-3xl font-medium tracking-tight md:text-center lg:text-5xl"
             >
               {post.title}
             </h1>
@@ -82,7 +82,7 @@ export function ReadsLayout({
             {/* Author */}
             {author && (
               <div className="mb-4 flex items-center gap-2 self-start md:self-center">
-                <span className="text-lg font-medium text-zinc-700 md:text-2xl dark:text-zinc-300">
+                <span className="text-text-secondary text-lg font-medium md:text-2xl">
                   by <span className="italic">{author}</span>
                 </span>
               </div>
@@ -92,7 +92,7 @@ export function ReadsLayout({
             <div className="flex flex-wrap items-center gap-2 self-start md:self-center lg:gap-4">
               {/* Reading Period or Published Date */}
               <time
-                className="relative z-10 flex items-center gap-1 font-sans text-sm font-semibold text-zinc-600 capitalize lg:text-sm dark:text-zinc-400"
+                className="text-text-tertiary relative z-10 flex items-center gap-1 font-sans text-sm font-semibold capitalize lg:text-sm"
                 dateTime={
                   readingPeriod
                     ? readingStartedAt || readingCompletedAt || post.publishedAt
@@ -107,8 +107,8 @@ export function ReadsLayout({
                 </span>
               </time>
 
-              <span className="h-1 w-1 rounded-full bg-zinc-600 dark:bg-zinc-500" />
-              <span className="flex min-w-20 items-center gap-1 font-sans text-xs font-semibold text-zinc-600 capitalize lg:text-sm dark:text-zinc-400">
+              <span className="bg-text-tertiary h-1 w-1 rounded-full" />
+              <span className="text-text-tertiary flex min-w-20 items-center gap-1 font-sans text-xs font-semibold capitalize lg:text-sm">
                 {post.readingTime}
               </span>
 
@@ -141,7 +141,7 @@ export function ReadsLayout({
           >
             {!!post.updatedAt && (
               <time
-                className="relative z-10 -mb-4 flex self-start font-serif text-lg text-neutral-800 italic dark:text-zinc-300"
+                className="text-text-secondary relative z-10 -mb-4 flex self-start font-serif text-lg italic"
                 dateTime={post.updatedAt}
               >
                 <span className="font-medium">

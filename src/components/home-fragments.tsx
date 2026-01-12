@@ -22,14 +22,14 @@ export function HomeFragments({
     <div className="flex flex-col gap-4 md:gap-6">
       <Link
         href="/fragments"
-        className="group flex w-max items-center gap-1 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
+        className="group hover:text-accent flex w-max items-center gap-1 transition-colors"
       >
-        <h2 className="font-sans! text-base font-semibold text-zinc-500 group-hover:text-blue-600 sm:text-lg dark:text-zinc-400 dark:group-hover:text-blue-400">
+        <h2 className="text-text-muted group-hover:text-accent font-sans! text-base font-semibold sm:text-lg">
           {title}
         </h2>
-        <ArrowRightIcon className="h-4 w-4 fill-zinc-500 transition-transform group-hover:translate-x-0.5 group-hover:fill-blue-600 dark:fill-zinc-400 dark:group-hover:fill-blue-400" />
+        <ArrowRightIcon className="fill-icon-muted group-hover:fill-accent h-4 w-4 transition-transform group-hover:translate-x-0.5" />
       </Link>
-      <div className="divide-y divide-zinc-200/70 dark:divide-zinc-700/50">
+      <div className="divide-border-muted divide-y">
         {allFragments.map((fragment) => (
           <div key={fragment.id} className="py-6 first:pt-0 last:pb-0">
             <FragmentCard fragment={fragment} />
@@ -38,7 +38,7 @@ export function HomeFragments({
       </div>
       <Link
         href="/fragments"
-        className="text-base text-zinc-500 italic hover:text-blue-600 dark:text-zinc-400 dark:hover:text-blue-400"
+        className="text-text-muted hover:text-accent text-base italic"
       >
         View more
       </Link>

@@ -74,9 +74,9 @@ export function WritingsView({ writings }: WritingsViewProps) {
       />
 
       {/* Page Title */}
-      <h2 className="font-serif text-3xl font-medium tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
+      <h2 className="text-text-primary font-serif text-3xl font-medium tracking-tight sm:text-5xl">
         {getTitle()}{' '}
-        <sup className="-top-3 -mt-4 text-base text-zinc-500 md:-top-5 md:text-base">
+        <sup className="text-text-muted -top-3 -mt-4 text-base md:-top-5 md:text-base">
           {filteredWritings.length}
         </sup>
       </h2>
@@ -89,7 +89,7 @@ export function WritingsView({ writings }: WritingsViewProps) {
       />
 
       {/* Posts List */}
-      <div className="mt-4 divide-y divide-zinc-200/70 border-zinc-200/70 dark:divide-zinc-700/50 dark:border-zinc-700/50">
+      <div className="divide-border-muted border-border-muted mt-4 divide-y">
         {filteredWritings.length > 0 ? (
           filteredWritings.map((post, index) => (
             <div
@@ -100,7 +100,7 @@ export function WritingsView({ writings }: WritingsViewProps) {
             </div>
           ))
         ) : (
-          <p className="py-6 text-center text-zinc-500">No writings found.</p>
+          <p className="text-text-muted py-6 text-center">No writings found.</p>
         )}
       </div>
 
@@ -108,7 +108,7 @@ export function WritingsView({ writings }: WritingsViewProps) {
       {(currentTag || currentType) && (
         <div className="mt-4 text-center">
           <Link
-            className="text-zinc-600 underline hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200"
+            className="text-text-tertiary hover:text-text-primary underline"
             href="/writings"
           >
             Clear all filters

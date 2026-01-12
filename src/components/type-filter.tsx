@@ -37,14 +37,14 @@ export function TypeFilter({
               href={href}
               className={`transition-opacity hover:opacity-100 ${
                 isActive
-                  ? 'font-semibold text-zinc-900 dark:text-zinc-100'
-                  : 'text-zinc-500 opacity-60 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300'
+                  ? 'text-text-primary font-semibold'
+                  : 'text-text-muted hover:text-text-secondary opacity-60'
               }`}
             >
               {label}
             </Link>
             {index < types.length - 1 && (
-              <span className="mx-2 text-zinc-300 dark:text-zinc-600">/</span>
+              <span className="text-separator mx-2">/</span>
             )}
           </span>
         );

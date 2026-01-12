@@ -258,18 +258,18 @@ export function DynamicTOC({ postData, readingTime }: DynamicTOCProps) {
           <div
             className={`absolute top-0 left-0 w-0.5 transition-all duration-300 ease-out ${
               isActive
-                ? 'bg-blue-500 opacity-100'
-                : 'bg-zinc-300 opacity-40 dark:bg-zinc-600'
+                ? 'bg-accent-indicator opacity-100'
+                : 'bg-progress-bg opacity-40'
             }`}
             style={{ height: '100%' }}
           />
 
           {/* Heading link */}
           <button
-            className={`group block w-full rounded-r-md py-1 pr-2 pl-4 text-left text-base transition-all duration-200 hover:bg-blue-50/50 hover:text-blue-600 dark:hover:bg-blue-950/30 dark:hover:text-blue-400 ${
+            className={`group hover:bg-accent-muted/50 hover:text-accent block w-full rounded-r-md py-1 pr-2 pl-4 text-left text-base transition-all duration-200 ${
               isActive
-                ? 'bg-blue-50/70 font-medium text-blue-600 dark:bg-blue-950/50 dark:text-blue-400'
-                : 'text-zinc-600 dark:text-zinc-400'
+                ? 'bg-accent-muted/70 text-accent font-medium'
+                : 'text-text-tertiary'
             } ${level > 0 ? 'ml-4' : ''}`}
             onClick={() => handleHeadingClick(heading.slug, true)}
           >
@@ -325,7 +325,7 @@ export function DynamicTOC({ postData, readingTime }: DynamicTOCProps) {
                 ? 'Expand table of contents'
                 : 'Collapse table of contents'
             }
-            className="mb-3 -ml-1.5 flex cursor-pointer items-center gap-2 rounded-md px-1.5 py-1 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800"
+            className="hover:bg-bg-hover mb-3 -ml-1.5 flex cursor-pointer items-center gap-2 rounded-md px-1.5 py-1 transition-colors"
             onClick={() => setIsMinimized(!isMinimized)}
           >
             {/* Circular progress indicator */}
@@ -338,7 +338,7 @@ export function DynamicTOC({ postData, readingTime }: DynamicTOCProps) {
               >
                 {/* Background circle */}
                 <circle
-                  className="text-zinc-300 dark:text-zinc-600"
+                  className="text-progress-bg"
                   cx="16"
                   cy="16"
                   fill="none"
@@ -348,7 +348,7 @@ export function DynamicTOC({ postData, readingTime }: DynamicTOCProps) {
                 />
                 {/* Progress circle */}
                 <circle
-                  className="text-blue-500 transition-all duration-300"
+                  className="text-accent-indicator transition-all duration-300"
                   cx="16"
                   cy="16"
                   fill="none"
@@ -364,7 +364,7 @@ export function DynamicTOC({ postData, readingTime }: DynamicTOCProps) {
               </svg>
             </div>
             <span
-              className={`text-sm font-semibold text-zinc-800 transition-all duration-300 dark:text-zinc-200 ${
+              className={`text-text-primary text-sm font-semibold transition-all duration-300 ${
                 isMinimized
                   ? 'w-0 overflow-hidden opacity-0'
                   : 'w-auto opacity-100'
@@ -374,7 +374,7 @@ export function DynamicTOC({ postData, readingTime }: DynamicTOCProps) {
             </span>
             {/* Chevron indicator */}
             <svg
-              className={`h-3 w-3 text-zinc-400 transition-all duration-300 dark:text-zinc-500 ${
+              className={`text-text-muted h-3 w-3 transition-all duration-300 ${
                 isMinimized ? 'w-0 opacity-0' : 'opacity-100'
               }`}
               fill="none"
@@ -410,7 +410,7 @@ export function DynamicTOC({ postData, readingTime }: DynamicTOCProps) {
         {/* Mobile TOC Toggle Button */}
         <button
           aria-label="Toggle table of contents"
-          className="fixed right-6 bottom-6 z-[40] flex h-12 w-12 items-center justify-center rounded-full bg-zinc-900 text-white transition-all duration-300 hover:opacity-80 dark:bg-zinc-100 dark:text-zinc-900"
+          className="bg-icon text-text-inverted fixed right-6 bottom-6 z-[40] flex h-12 w-12 items-center justify-center rounded-full transition-all duration-300 hover:opacity-80"
           onClick={() => setIsMobileOpen(!isMobileOpen)}
         >
           <svg
@@ -458,16 +458,16 @@ export function DynamicTOC({ postData, readingTime }: DynamicTOCProps) {
 
           {/* TOC Panel */}
           <div
-            className={`relative w-full max-w-sm transform rounded-t-lg bg-white p-6 shadow-xl transition-transform duration-300 ease-out dark:bg-zinc-900 ${
+            className={`bg-bg-surface relative w-full max-w-sm transform rounded-t-lg p-6 shadow-xl transition-transform duration-300 ease-out ${
               isMobileOpen ? 'translate-y-0' : 'translate-y-full'
             }`}
           >
             <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-zinc-800 dark:text-zinc-200">
+              <h3 className="text-text-primary text-lg font-semibold">
                 On this page
               </h3>
               <button
-                className="rounded-full p-1 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
+                className="text-text-tertiary hover:bg-bg-hover hover:text-text-primary rounded-full p-1"
                 onClick={() => setIsMobileOpen(false)}
               >
                 <svg
@@ -492,8 +492,8 @@ export function DynamicTOC({ postData, readingTime }: DynamicTOCProps) {
                     <button
                       className={`block w-full rounded px-3 py-2 text-left text-base transition-colors ${
                         activeHeading === heading.slug
-                          ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
-                          : 'text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800'
+                          ? 'bg-accent-muted text-accent'
+                          : 'text-text-tertiary hover:bg-bg-hover'
                       } ${heading.depth > 2 ? 'ml-4 text-sm' : ''}`}
                       onClick={() => {
                         handleHeadingClick(heading.slug);

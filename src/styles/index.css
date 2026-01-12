@@ -23,6 +23,80 @@
   --font-serif-title:
     var(--font-newsreader), ui-serif, Georgia, Cambria, 'Times New Roman',
     Times, serif;
+
+  /* ===== SEMANTIC COLOR TOKENS ===== */
+
+  /* Text colors */
+  --color-text-primary: var(--color-zinc-900);
+  --color-text-secondary: var(--color-zinc-700);
+  --color-text-tertiary: var(--color-zinc-600);
+  --color-text-muted: var(--color-zinc-500);
+  --color-text-inverted: white;
+
+  /* Background colors */
+  --color-bg-body: #fff1e5;
+  --color-bg-surface: white;
+  --color-bg-surface-elevated: rgb(255 255 255 / 0.9);
+  --color-bg-muted: var(--color-zinc-50);
+  --color-bg-hover: var(--color-zinc-100);
+  --color-bg-active: var(--color-zinc-200);
+  --color-bg-overlay: rgb(0 0 0 / 0.5);
+
+  /* Accent colors (interactive) */
+  --color-accent: var(--color-blue-600);
+  --color-accent-hover: var(--color-blue-800);
+  --color-accent-muted: var(--color-blue-50);
+  --color-accent-indicator: var(--color-blue-500);
+
+  /* Border colors */
+  --color-border-default: var(--color-zinc-200);
+  --color-border-muted: rgb(228 228 231 / 0.7);
+  --color-ring: rgb(24 24 27 / 0.05);
+
+  /* Selection colors */
+  --color-selection-bg: var(--color-amber-700);
+  --color-selection-text: white;
+
+  /* Utility colors */
+  --color-icon: var(--color-zinc-900);
+  --color-icon-muted: var(--color-zinc-500);
+  --color-separator: var(--color-zinc-300);
+  --color-progress-bg: var(--color-zinc-300);
+  --color-sidenote: var(--color-neutral-400);
+}
+
+/* Dark mode overrides */
+.dark {
+  --color-text-primary: var(--color-zinc-100);
+  --color-text-secondary: var(--color-zinc-300);
+  --color-text-tertiary: var(--color-zinc-400);
+  --color-text-muted: var(--color-zinc-400);
+  --color-text-inverted: var(--color-zinc-900);
+
+  --color-bg-body: #111110;
+  --color-bg-surface: var(--color-zinc-900);
+  --color-bg-surface-elevated: rgb(39 39 42 / 0.9);
+  --color-bg-muted: var(--color-zinc-800);
+  --color-bg-hover: var(--color-zinc-800);
+  --color-bg-active: var(--color-zinc-700);
+  --color-bg-overlay: rgb(0 0 0 / 0.8);
+
+  --color-accent: var(--color-blue-400);
+  --color-accent-hover: var(--color-blue-300);
+  --color-accent-muted: rgb(23 37 84 / 0.5);
+  --color-accent-indicator: var(--color-blue-500);
+
+  --color-border-default: var(--color-zinc-700);
+  --color-border-muted: rgb(63 63 70 / 0.5);
+  --color-ring: rgb(255 255 255 / 0.1);
+
+  --color-selection-bg: var(--color-amber-800);
+
+  --color-icon: var(--color-zinc-200);
+  --color-icon-muted: var(--color-zinc-400);
+  --color-separator: var(--color-zinc-600);
+  --color-progress-bg: var(--color-zinc-600);
+  --color-sidenote: var(--color-zinc-600);
 }
 
 /* Replace tailwind-scrollbar-hide with native utility */
@@ -58,10 +132,10 @@ html {
 }
 
 ::selection {
-  @apply bg-amber-700 text-white dark:bg-amber-800;
+  @apply bg-selection-bg text-selection-text;
 }
 body {
-  @apply bg-[#fff1e5] font-serif text-xl/relaxed text-zinc-900 dark:bg-[#111110] dark:text-zinc-100;
+  @apply bg-bg-body font-serif text-xl/relaxed text-text-primary;
 }
 
 h1,
@@ -124,7 +198,7 @@ h4:hover .anchor-link {
 
 /* Sidenote styles - margin notes for posts */
 .sidenote {
-  @apply my-4 py-3 pr-4 pl-4 text-lg leading-relaxed text-neutral-400! dark:text-zinc-600;
+  @apply my-4 py-3 pr-4 pl-4 text-lg leading-relaxed text-sidenote;
 }
 
 .sidenote p {

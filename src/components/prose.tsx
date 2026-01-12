@@ -8,7 +8,7 @@ export function Prose({
     <div
       className={clsx(
         className,
-        'prose-xl md:prose-xl prose dark:prose-invert prose-headings:scroll-mt-16 prose-headings:text-2xl md:prose-headings:text-3xl lg:scrollbar-hide prose-table:overflow-x-auto prose-table:block prose-table:w-full prose-th:text-lg prose-p:text-zinc-900 prose-li:text-zinc-900 prose-strong:text-zinc-900 dark:prose-p:text-zinc-100 dark:prose-li:text-zinc-300 dark:prose-strong:text-zinc-300 prose-p:leading-8.75',
+        'prose-xl md:prose-xl prose dark:prose-invert prose-headings:scroll-mt-16 prose-headings:text-2xl md:prose-headings:text-3xl lg:scrollbar-hide prose-table:overflow-x-auto prose-table:block prose-table:w-full prose-th:text-lg prose-p:text-text-primary prose-li:text-text-primary prose-strong:text-text-primary prose-p:leading-8.75',
       )}
       {...props}
     />
