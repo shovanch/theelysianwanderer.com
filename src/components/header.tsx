@@ -15,13 +15,6 @@ import { useEffect, useRef, useState } from 'react';
 import { PiListDuotone } from 'react-icons/pi';
 import { Container } from '~/components/container';
 import { CommandBar } from './pagefind/command-bar';
-import {
-  ChefIcon,
-  GamingIcon,
-  GoodreadsIcon,
-  InstagramIcon,
-  MailIcon,
-} from './social-icons';
 import avatarImage from '~public/images/home/me.webp';
 
 function CloseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -157,69 +150,7 @@ function MobileNavigation(
             <MobileNavItem href="/reads">Reads</MobileNavItem>
             <MobileNavItem href="/photos">Photos</MobileNavItem>
             <MobileNavItem href="/fragments">Fragments</MobileNavItem>
-            <div className="flex flex-row gap-8">
-              <MobileNavItem
-                isIcon
-                href="mailto:hello@shovanch.com"
-                target="_blank"
-              >
-                <div className="-ml-2 flex items-center">
-                  <MailIcon className="h-10 w-10 flex-none fill-zinc-900 transition group-hover:fill-blue-500 dark:fill-zinc-200" />{' '}
-                </div>
-              </MobileNavItem>
-              <MobileNavItem
-                isIcon
-                href="https://www.instagram.com/theelysianwanderer/"
-                target="_blank"
-              >
-                <div className="-ml-2 flex items-center">
-                  <InstagramIcon className="h-10 w-10 flex-none fill-zinc-900 transition group-hover:fill-blue-500 dark:fill-zinc-200" />{' '}
-                </div>
-              </MobileNavItem>
-              <MobileNavItem
-                isIcon
-                href="https://steamcommunity.com/id/ElysianSpectre/"
-                target="_blank"
-              >
-                <div className="-ml-2 flex items-center gap-2">
-                  <GamingIcon className="h-10 w-10 flex-none fill-zinc-900 transition group-hover:fill-blue-500 dark:fill-zinc-200" />{' '}
-                </div>
-              </MobileNavItem>
-              <MobileNavItem
-                isIcon
-                href="https://www.instagram.com/enchantedforks"
-                target="_blank"
-              >
-                <div className="-ml-2 flex items-center gap-2">
-                  <ChefIcon className="h-10 w-10 flex-none fill-zinc-900 transition group-hover:fill-blue-500 dark:fill-zinc-200" />{' '}
-                </div>
-              </MobileNavItem>
-              <MobileNavItem
-                isIcon
-                href="https://www.goodreads.com/shovanch"
-                target="_blank"
-              >
-                <div className="-ml-2 flex items-center gap-2">
-                  <GoodreadsIcon className="h-10 w-10 flex-none fill-zinc-900 transition group-hover:fill-blue-500 dark:fill-zinc-200" />{' '}
-                </div>
-              </MobileNavItem>
-              {/* <MobileNavItem
-                href="https://www.pinterest.com/theelysianwanderer/"
-                target="_blank"
-              >
-                <div className="flex items-center gap-2 -ml-2">
-                  <PinterestIcon className="h-10 w-10 flex-none dark:fill-zinc-200 fill-zinc-900 transition group-hover:fill-blue-500" />{" "}
-                </div>
-              </MobileNavItem> */}
-              {/* <MobileNavItem
-                href="https://www.chess.com/stats/overview/shovanc"
-                target="_blank"
-              >
-                <div className="flex items-center gap-2 -ml-2">
-                  <ChessIcon className="h-10 w-10 flex-none dark:fill-zinc-200 fill-zinc-900 transition group-hover:fill-blue-500" />{" "}
-                </div>
-              </MobileNavItem> */}
-            </div>
+            <MobileNavItem href="/links">Links</MobileNavItem>
           </ul>
         </nav>
       </PopoverPanel>

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { PiX } from 'react-icons/pi';
+import { CountBadge } from '~/components/count-badge';
 import { formatTag } from '~/utils/content-tags';
 
 type TagsData = {
@@ -51,9 +52,7 @@ export function TagsSection({
                 }
               >
                 {formatTag(tag)}
-                <sup className="mt-1 ml-1 text-sm opacity-50 md:text-sm">
-                  {count}
-                </sup>
+                <CountBadge count={count} variant="tag" />
                 {isActive && <PiX className="ml-1 h-3 w-3 md:h-4 md:w-4" />}
               </Link>
             );
@@ -82,9 +81,7 @@ export function TagsSection({
                 }}
               >
                 {formatTag(tag)}
-                <sup className="-mt-0.5 ml-1 text-xs opacity-50 md:text-sm">
-                  {count}
-                </sup>
+                <CountBadge count={count} variant="tag-mobile" />
                 {isActive && <PiX className="ml-1 h-3 w-3 md:h-4 md:w-4" />}
               </Link>
             );

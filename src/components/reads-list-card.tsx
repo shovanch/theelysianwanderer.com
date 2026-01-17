@@ -33,7 +33,7 @@ export function ReadsListCard({ post }: { post: PostData | PostMetaOnly }) {
   return (
     <Link
       href={`/${subdirectory}/${slug}`}
-      className="group flex w-full flex-col gap-4 md:flex-row md:items-start"
+      className="group flex w-full flex-row items-start gap-4 md:items-center"
     >
       {/* Cover Image */}
       {coverImage && (
@@ -67,7 +67,7 @@ export function ReadsListCard({ post }: { post: PostData | PostMetaOnly }) {
 
       {/* Content */}
       <div className="min-w-0 flex-1">
-        <h3 className="font-serif text-xl font-semibold text-zinc-800 capitalize transition-colors group-hover:text-teal-600 md:text-2xl dark:text-zinc-100 dark:group-hover:text-teal-400">
+        <h3 className="font-serif text-base font-semibold text-zinc-800 capitalize transition-colors group-hover:text-teal-600 md:text-2xl dark:text-zinc-100 dark:group-hover:text-teal-400">
           {title}
         </h3>
 
@@ -79,10 +79,10 @@ export function ReadsListCard({ post }: { post: PostData | PostMetaOnly }) {
         )}
 
         {/* Metadata Row */}
-        <div className="flex flex-wrap items-center gap-2 text-sm md:text-base lg:gap-3">
+        <div className="flex flex-wrap items-center gap-2 text-xs md:text-sm lg:gap-3">
           {/* Reading Period or Published Date */}
           <time
-            className="relative z-10 flex items-center gap-1 font-sans text-sm font-semibold text-zinc-600 capitalize lg:text-sm dark:text-zinc-400"
+            className="relative z-10 flex items-center gap-1 font-sans font-semibold text-zinc-600 capitalize dark:text-zinc-400"
             dateTime={
               readingPeriod
                 ? readingStartedAt || readingCompletedAt
@@ -102,7 +102,7 @@ export function ReadsListCard({ post }: { post: PostData | PostMetaOnly }) {
           <span className="h-1 w-1 rounded-full bg-zinc-600 dark:bg-zinc-500" />
 
           {/* Reading Time */}
-          <span className="flex min-w-20 items-center gap-1 font-sans text-xs font-semibold text-zinc-600 capitalize lg:text-sm dark:text-zinc-400">
+          <span className="flex min-w-20 items-center gap-1 font-sans font-semibold text-zinc-600 capitalize dark:text-zinc-400">
             {readingTime}
           </span>
         </div>

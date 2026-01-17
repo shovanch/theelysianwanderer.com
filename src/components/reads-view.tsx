@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
+import { CountBadge } from '~/components/count-badge';
 import { TagsSection } from '~/components/tags-section';
 import {
   filterPostsByTag,
@@ -63,16 +64,11 @@ export function ReadsView({ posts }: ReadsViewProps) {
       {currentTag ? (
         <h2 className="font-serif text-3xl font-medium tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
           {`${formatTag(currentTag)}`}{' '}
-          <sup className="-top-3 -mt-4 text-base text-zinc-500 md:-top-5 md:text-base">
-            {filteredPosts.length}
-          </sup>
+          <CountBadge count={filteredPosts.length} />
         </h2>
       ) : (
         <h2 className="font-serif text-3xl font-medium tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-          Reads{' '}
-          <sup className="-top-3 -mt-4 text-base text-zinc-500 md:-top-5 md:text-base">
-            {posts.length}
-          </sup>
+          Reads <CountBadge count={posts.length} />
         </h2>
       )}
 

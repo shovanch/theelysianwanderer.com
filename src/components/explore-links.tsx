@@ -28,6 +28,11 @@ const exploreLinks = [
     description: 'Stray thoughts, tiny updates',
     url: '/fragments',
   },
+  {
+    title: 'Links',
+    description: 'Elsewhere on the internet',
+    url: '/links',
+  },
 ];
 
 export function ExploreLinks() {

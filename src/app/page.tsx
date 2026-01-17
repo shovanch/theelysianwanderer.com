@@ -29,43 +29,6 @@ export default async function Home() {
             <Signature className="h-16 md:h-auto" />
           </div>
           <MarkdownContent className="mt-6" content={heroContent} />
-          <div className="mt-8 lg:mt-8">
-            <ul
-              className="flex items-center gap-5 lg:items-start lg:gap-6"
-              role="list"
-            >
-              <SocialLink
-                aria-label="Email"
-                className="lg:w-max"
-                href="mailto:hello@shovanch.com"
-                icon={MailIcon}
-              />
-              <SocialLink
-                aria-label="Instagram"
-                className="lg:w-max"
-                href="https://www.instagram.com/theelysianwanderer/"
-                icon={InstagramIcon}
-              />
-              <SocialLink
-                aria-label="Steam"
-                className="lg:w-max"
-                href="https://steamcommunity.com/id/ElysianSpectre/"
-                icon={GamingIcon}
-              />
-              <SocialLink
-                aria-label="Goodreads"
-                className="lg:w-max"
-                href="https://www.goodreads.com/shovanch"
-                icon={GoodreadsIcon}
-              />
-              <SocialLink
-                aria-label="Enchanted Forks"
-                className="lg:w-max"
-                href="https://instagram.com/enchantedforks"
-                icon={ChefIcon}
-              />
-            </ul>
-          </div>
         </div>
       </Container>
       <div className="mt-4 sm:mt-12">

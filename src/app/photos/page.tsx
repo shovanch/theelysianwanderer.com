@@ -1,4 +1,5 @@
 import { Container } from '~/components/container';
+import { CountBadge } from '~/components/count-badge';
 import { GalleryCard } from '~/components/gallery-card';
 import { getPhotoGalleries } from '~/utils/photos';
 
@@ -13,10 +14,7 @@ export default function PhotosPage() {
   return (
     <Container className="mt-16 pb-8 lg:mt-20">
       <h1 className="font-serif text-3xl font-medium tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-        Photos{' '}
-        <sup className="-top-3 -mt-4 text-base text-zinc-500 md:-top-5 md:text-base">
-          {galleries.length}
-        </sup>
+        Photos <CountBadge count={galleries.length} />
       </h1>
 
       <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

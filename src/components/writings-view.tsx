@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
+import { CountBadge } from '~/components/count-badge';
 import { PostCard } from '~/components/post-card';
 import { TagsSection } from '~/components/tags-section';
 import { TypeFilter } from '~/components/type-filter';
@@ -75,10 +76,7 @@ export function WritingsView({ writings }: WritingsViewProps) {
 
       {/* Page Title */}
       <h2 className="text-text-primary font-serif text-3xl font-medium tracking-tight sm:text-5xl">
-        {getTitle()}{' '}
-        <sup className="text-text-muted -top-3 -mt-4 text-base md:-top-5 md:text-base">
-          {filteredWritings.length}
-        </sup>
+        {getTitle()} <CountBadge count={filteredWritings.length} />
       </h2>
 
       {/* Tags Section */}

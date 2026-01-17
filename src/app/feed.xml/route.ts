@@ -4,19 +4,29 @@ import { baseUrl } from '../sitemap';
 export async function GET() {
   const allPosts = getPosts('posts');
   const allTravels = getPosts('travels');
+  const allNotes = getPosts('notes');
 
-  const itemsXml = [...allPosts, ...allTravels]
+  // Combine all content with correct URL prefixes
+  const allItems = [
+    ...allPosts.map((post) => ({ post, urlPrefix: 'posts' })),
+    ...allTravels.map((post) => ({ post, urlPrefix: 'travels' })),
+    ...allNotes.map((post) => ({ post, urlPrefix: 'notes' })),
+  ];
+
+  const itemsXml = allItems
     .sort((a, b) => {
-      if (new Date(a.meta.publishedAt) > new Date(b.meta.publishedAt)) {
+      if (
+        new Date(a.post.meta.publishedAt) > new Date(b.post.meta.publishedAt)
+      ) {
         return -1;
       }
       return 1;
     })
     .map(
-      (post) =>
+      ({ post, urlPrefix }) =>
         `<item>
           <title>${post.meta.title}</title>
-          <link>${baseUrl}/posts/${post.slug}</link>
+          <link>${baseUrl}/${urlPrefix}/${post.slug}</link>
           <description>${post.meta.summary || ''}</description>
           <pubDate>${new Date(post.meta.publishedAt).toUTCString()}</pubDate>
         </item>`,

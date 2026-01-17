@@ -26,7 +26,7 @@ export function ReadsGridCard({ post }: { post: PostData | PostMetaOnly }) {
           <div className="relative cursor-pointer rounded-md leading-none shadow-[6px_6px_16px_-2px_rgba(0,0,0,0.2),_12px_12px_24px_-4px_rgba(0,0,0,0.1)] transition-all duration-300 ease-in-out perspective-[2000px] group-hover:-translate-x-2.5 group-hover:scale-x-[0.94] group-hover:-rotate-y-[15deg] group-hover:rounded-r-md group-hover:shadow-[6px_6px_18px_-2px_rgba(0,0,0,0.2),_24px_28px_40px_-6px_rgba(0,0,0,0.1)] dark:shadow-[4px_4px_12px_-2px_rgba(255,255,255,0.1)] dark:group-hover:shadow-[6px_6px_18px_-2px_rgba(255,255,255,0.15),_24px_28px_40px_-6px_rgba(255,255,255,0.08)]">
             <div className="relative cursor-pointer rounded-md leading-none group-hover:rounded-r-md">
               {/* Container for the cover image */}
-              <div className="relative h-40 w-28 overflow-hidden rounded-md group-hover:rounded-r-md md:h-60 md:w-40">
+              <div className="relative aspect-2/3 w-24 overflow-hidden rounded-md group-hover:rounded-r-md sm:w-28 md:h-60 md:w-40">
                 {coverSrc ? (
                   <img
                     alt={`Cover of ${title}`}

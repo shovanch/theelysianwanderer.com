@@ -271,7 +271,7 @@ export function DynamicTOC({ postData, readingTime }: DynamicTOCProps) {
                 ? 'bg-accent-muted/70 text-accent font-medium'
                 : 'text-text-tertiary'
             } ${level > 0 ? 'ml-4' : ''}`}
-            onClick={() => handleHeadingClick(heading.slug, true)}
+            onClick={() => handleHeadingClick(heading.slug)}
           >
             <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">
               {heading.text}
@@ -410,7 +410,7 @@ export function DynamicTOC({ postData, readingTime }: DynamicTOCProps) {
         {/* Mobile TOC Toggle Button */}
         <button
           aria-label="Toggle table of contents"
-          className="bg-icon text-text-inverted fixed right-6 bottom-6 z-[40] flex h-12 w-12 items-center justify-center rounded-full transition-all duration-300 hover:opacity-80"
+          className="bg-icon text-text-inverted fixed right-4 bottom-4 z-40 flex h-10 w-10 items-center justify-center rounded-full opacity-80 transition-all duration-300 hover:opacity-100"
           onClick={() => setIsMobileOpen(!isMobileOpen)}
         >
           <svg

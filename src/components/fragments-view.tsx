@@ -2,6 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
+import { CountBadge } from '~/components/count-badge';
 import { FragmentCard } from '~/components/fragment-card';
 import { TagsSection } from '~/components/tags-section';
 import type { FragmentData } from '~/types/fragments';
@@ -42,9 +43,7 @@ export function FragmentsView({ fragments, categories }: FragmentsViewProps) {
         ) : (
           'Fragments'
         )}{' '}
-        <sup className="-top-3 -mt-4 text-base text-zinc-500 md:-top-5 md:text-base">
-          {filteredFragments.length}
-        </sup>
+        <CountBadge count={filteredFragments.length} />
       </h1>
 
       <TagsSection

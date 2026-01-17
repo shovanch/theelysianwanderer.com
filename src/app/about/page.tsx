@@ -7,6 +7,7 @@ import {
   GamingIcon,
   GoodreadsIcon,
   InstagramIcon,
+  LetterboxdIcon,
   MailIcon,
 } from '~/components/social-icons';
 import { SocialLink } from '~/components/social-link';
@@ -45,7 +46,7 @@ export default function About() {
               <SocialLink
                 aria-label="Email"
                 className="lg:w-max"
-                href="mailto:hello@shovanch.com"
+                href="mailto:hi@theelysianwanderer.com"
                 icon={MailIcon}
               />
               <SocialLink
@@ -67,7 +68,13 @@ export default function About() {
                 icon={GoodreadsIcon}
               />
               <SocialLink
-                aria-label="Instagram"
+                aria-label="Letterboxd"
+                className="lg:w-max"
+                href="https://letterboxd.com/shovanch/"
+                icon={LetterboxdIcon}
+              />
+              <SocialLink
+                aria-label="Enchanted Forks"
                 className="lg:w-max"
                 href="https://instagram.com/enchantedforks"
                 icon={ChefIcon}

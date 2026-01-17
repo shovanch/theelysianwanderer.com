@@ -406,3 +406,112 @@ export function SearchIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
     </svg>
   );
 }
+
+export function RssIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
+  return (
+    <svg
+      height="32"
+      viewBox="0 0 256 256"
+      width="32"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="M64,192V40A152,152,0,0,1,216,192Z" opacity="0.2" />
+      <path
+        d="M64,40A152,152,0,0,1,216,192"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+      />
+      <path
+        d="M64,112a80,80,0,0,1,80,80"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+      />
+      <circle cx="68" cy="188" r="12" />
+    </svg>
+  );
+}
+
+export function LetterboxdIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
+  return (
+    <svg
+      height="32"
+      viewBox="0 0 256 256"
+      width="32"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M128,32a96,96,0,1,0,96,96A96,96,0,0,0,128,32ZM80,144a16,16,0,1,1,16-16A16,16,0,0,1,80,144Zm48,48a16,16,0,1,1,16-16A16,16,0,0,1,128,192Zm0-96a16,16,0,1,1,16-16A16,16,0,0,1,128,96Zm48,48a16,16,0,1,1,16-16A16,16,0,0,1,176,144Z"
+        opacity="0.2"
+      />
+      <circle
+        cx="128"
+        cy="128"
+        fill="none"
+        r="96"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+      />
+      <line
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+        x1="128"
+        x2="232"
+        y1="224"
+        y2="224"
+      />
+      <circle
+        cx="128"
+        cy="80"
+        fill="none"
+        r="16"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+      />
+      <circle
+        cx="128"
+        cy="176"
+        fill="none"
+        r="16"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+      />
+      <circle
+        cx="176"
+        cy="128"
+        fill="none"
+        r="16"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+      />
+      <circle
+        cx="80"
+        cy="128"
+        fill="none"
+        r="16"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+      />
+    </svg>
+  );
+}
